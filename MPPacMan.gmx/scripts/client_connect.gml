@@ -66,6 +66,15 @@ while(true){
             
             clientObject.name = username;
         break;
+        case MESSAGE_LEAVE:
+            var
+            client = buffer_read(buffer, buffer_u16);
+            tempObject = client_get_object(client);
+            
+            with(tempObject){
+                instance_destroy();
+            }
+        break;
     }
     
     if(buffer_tell(buffer) == buffer_get_size(buffer)){
