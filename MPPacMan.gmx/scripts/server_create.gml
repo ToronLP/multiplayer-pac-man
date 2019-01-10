@@ -113,5 +113,5 @@ with(clientmap[? (string(socket_id))]){
 ds_map_delete(clientmap, string(socket_id));
 
 with(oServerClient){
-    network_send_raw(seld.socket_id, other.send_buffer, buffer_tell(other.send_buffer));
+    network_send_raw(self.socket_id, other.send_buffer, buffer_tell(other.send_buffer));
 }
