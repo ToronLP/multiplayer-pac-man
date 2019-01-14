@@ -33,12 +33,13 @@
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
-  <constants number="5">
+  <constants number="6">
     <constant name="SERVER_IP">"127.0.0.1"</constant>
     <constant name="UPDATE_SPEED">3</constant>
     <constant name="MESSAGE_MOVE">1</constant>
     <constant name="MESSAGE_JOIN">2</constant>
     <constant name="MESSAGE_LEAVE">3</constant>
+    <constant name="MAX_ANZ_CLIENTS">2</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

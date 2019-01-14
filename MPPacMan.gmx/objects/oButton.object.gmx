@@ -52,7 +52,7 @@
     with(oButton) instance_destroy();
     
     instance_create(0,0,oServer);
-} else {
+} else if(txt == "join server"){
     with(oButton) instance_destroy();
     
     instance_create(0,0, oClient);

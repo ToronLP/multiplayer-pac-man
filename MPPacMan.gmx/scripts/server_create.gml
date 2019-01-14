@@ -5,9 +5,10 @@ var
 port = argument0,
 server = 0;
 
-server = network_create_server_raw(network_socket_tcp, port, 20);
+server = network_create_server_raw(network_socket_tcp, port, MAX_ANZ_CLIENTS);
 clientmap = ds_map_create();
 client_id_counter = 0;
+actual_connected_clients = 0;
 
 send_buffer = buffer_create(256, buffer_fixed, 1);
 
@@ -30,6 +31,7 @@ if(client_id_counter >= 65000){
 }
 
 clientmap[? string(socket_id)] = l;
+actual_connected_clients++;
 
 #define server_handle_message
 ///server_handle_message(socket_id, buffer);
@@ -115,3 +117,4 @@ ds_map_delete(clientmap, string(socket_id));
 with(oServerClient){
     network_send_raw(self.socket_id, other.send_buffer, buffer_tell(other.send_buffer));
 }
+actual_connected_clients--;

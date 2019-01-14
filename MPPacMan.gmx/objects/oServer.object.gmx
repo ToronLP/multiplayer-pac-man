@@ -93,6 +93,7 @@ draw_set_halign(fa_center);
 draw_set_valign(fa_center);
 draw_text(x, y, "Die Server IP: "+string(SERVER_IP));
 draw_text(x, y+15, "Die Anzahl der Clients: "+string(client_id_counter));
+draw_text(x, y+30, "Die Anzahl der Aktuellen Clients: "+string(actual_connected_clients)+"/"+string(MAX_ANZ_CLIENTS));
 </string>
           </argument>
         </arguments>
