@@ -80,7 +80,9 @@ tim++;
             <kind>1</kind>
             <string>draw_self();
 draw_set_color(c_white);
-draw_text(x, y-24, name);
+draw_set_halign(fa_center);
+draw_set_valign(fa_center);
+draw_text(x+16, y-24, name);
 </string>
           </argument>
         </arguments>
@@ -89,7 +91,7 @@ draw_text(x, y-24, name);
   </events>
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
-  <PhysicsObjectShape>0</PhysicsObjectShape>
+  <PhysicsObjectShape>1</PhysicsObjectShape>
   <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
   <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>

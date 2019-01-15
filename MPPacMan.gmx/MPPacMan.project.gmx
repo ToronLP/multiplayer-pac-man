@@ -9,6 +9,7 @@
     <sprite>sprites\sPlayer</sprite>
     <sprite>sprites\sClient</sprite>
     <sprite>sprites\sButton</sprite>
+    <sprite>sprites\sPac</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -31,7 +32,7 @@
     </objects>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room0</room>
+    <room>rooms\rmOne</room>
   </rooms>
   <constants number="6">
     <constant name="SERVER_IP">"127.0.0.1"</constant>

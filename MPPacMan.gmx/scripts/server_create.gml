@@ -10,6 +10,7 @@ clientmap = ds_map_create();
 client_id_counter = 0;
 actual_connected_clients = 0;
 
+
 send_buffer = buffer_create(256, buffer_fixed, 1);
 
 if(server < 0) show_error("Could not Create Server!", true);

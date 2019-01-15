@@ -81,7 +81,10 @@
           <argument>
             <kind>1</kind>
             <string>draw_self();
-
+if(point_in_rectangle(mouse_x, mouse_y, x-96, y-32, x+96, y+32)){
+    draw_sprite(sPac, 0, x-120, y);
+    draw_sprite(sPac, 1, x+120, y);
+}
 draw_set_colour(c_white);
 draw_set_halign(fa_center);
 draw_set_valign(fa_center);
