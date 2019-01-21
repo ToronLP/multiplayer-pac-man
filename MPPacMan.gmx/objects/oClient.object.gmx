@@ -25,8 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>connected = false;
-get_string_async("Please enter a username", "");
+            <string>globalvar zuschauer;
+//zuschauer = false;
+connected = false;
+//if(zuschauer == false){
+    get_string_async("Please enter a username", "");
+//}
 </string>
           </argument>
         </arguments>
@@ -72,7 +76,9 @@ get_string_async("Please enter a username", "");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>client_send_movement();
+            <string>if(zuschauer==false){
+    client_send_movement();
+}
 alarm[0] = UPDATE_SPEED;
 </string>
           </argument>

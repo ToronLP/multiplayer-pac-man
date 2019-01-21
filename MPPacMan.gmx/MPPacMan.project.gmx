@@ -26,6 +26,7 @@
       <object>objects\oClient</object>
       <object>objects\oPlayer</object>
       <object>objects\oOtherClient</object>
+      <object>objects\oZuschauer</object>
     </objects>
     <objects name="util">
       <object>objects\oButton</object>
@@ -40,7 +41,7 @@
     <constant name="MESSAGE_MOVE">1</constant>
     <constant name="MESSAGE_JOIN">2</constant>
     <constant name="MESSAGE_LEAVE">3</constant>
-    <constant name="MAX_ANZ_CLIENTS">2</constant>
+    <constant name="MAX_ANZ_CLIENTS">6</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

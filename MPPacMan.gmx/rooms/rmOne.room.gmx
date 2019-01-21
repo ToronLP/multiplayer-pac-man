@@ -53,6 +53,7 @@
   <instances>
     <instance objName="oButton" x="512" y="192" name="inst_31DF7A9D" locked="0" code="txt = &quot;create server&quot;;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oButton" x="512" y="288" name="inst_08170319" locked="0" code="txt = &quot;join server&quot;;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oButton" x="512" y="384" name="inst_6985D58F" locked="0" code="txt = &quot;Zuschauen&quot;;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
