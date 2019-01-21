@@ -26,11 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>globalvar zuschauer;
-//zuschauer = false;
 connected = false;
-//if(zuschauer == false){
-    get_string_async("Please enter a username", "");
-//}
+var testvar = get_string_async("Please enter a username", "Zuschauer");
 </string>
           </argument>
         </arguments>
