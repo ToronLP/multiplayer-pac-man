@@ -36,7 +36,7 @@
     <room>rooms\rmOne</room>
   </rooms>
   <constants number="6">
-    <constant name="SERVER_IP">"127.0.0.1"</constant>
+    <constant name="SERVER_IP">"10.101.206.107"</constant>
     <constant name="UPDATE_SPEED">3</constant>
     <constant name="MESSAGE_MOVE">1</constant>
     <constant name="MESSAGE_JOIN">2</constant>
