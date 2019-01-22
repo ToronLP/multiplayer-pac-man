@@ -27,7 +27,10 @@
             <kind>1</kind>
             <string>globalvar zuschauer;
 connected = false;
-var testvar = get_string_async("Please enter a username", "Zuschauer");
+testvar = get_string_async("Please enter a username", "");
+if(testvar == ZUSCHAUER_CODE){
+    zuschauer=true;
+}
 </string>
           </argument>
         </arguments>

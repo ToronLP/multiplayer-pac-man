@@ -37,13 +37,14 @@
   <rooms name="rooms">
     <room>rooms\rmOne</room>
   </rooms>
-  <constants number="6">
-    <constant name="SERVER_IP">"10.101.206.107"</constant>
+  <constants number="7">
+    <constant name="SERVER_IP">"127.0.0.1"</constant>
     <constant name="UPDATE_SPEED">3</constant>
     <constant name="MESSAGE_MOVE">1</constant>
     <constant name="MESSAGE_JOIN">2</constant>
     <constant name="MESSAGE_LEAVE">3</constant>
     <constant name="MAX_ANZ_CLIENTS">6</constant>
+    <constant name="ZUSCHAUER_CODE">"21.01.2019"</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
