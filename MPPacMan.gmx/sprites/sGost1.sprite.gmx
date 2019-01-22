@@ -20,15 +20,14 @@
   <width>64</width>
   <height>64</height>
   <frames>
-    <frame index="0">images\sGost_0.png</frame>
-    <frame index="1">images\sGost_1.png</frame>
-    <frame index="2">images\sGost_2.png</frame>
-    <frame index="3">images\sGost_3.png</frame>
-    <frame index="4">images\sGost_4.png</frame>
-    <frame index="5">images\sGost_5.png</frame>
-    <frame index="6">images\sGost_6.png</frame>
-    <frame index="7">images\sGost_7.png</frame>
-    <frame index="8">images\sGost_8.png</frame>
-    <frame index="9">images\sGost_9.png</frame>
+    <frame index="0">images\sGost1_0.png</frame>
+    <frame index="1">images\sGost1_1.png</frame>
+    <frame index="2">images\sGost1_2.png</frame>
+    <frame index="3">images\sGost1_3.png</frame>
+    <frame index="4">images\sGost1_4.png</frame>
+    <frame index="5">images\sGost1_5.png</frame>
+    <frame index="6">images\sGost1_6.png</frame>
+    <frame index="7">images\sGost1_7.png</frame>
+    <frame index="8">images\sGost1_8.png</frame>
   </frames>
 </sprite>
