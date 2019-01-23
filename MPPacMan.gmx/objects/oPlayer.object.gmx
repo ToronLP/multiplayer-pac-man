@@ -48,10 +48,26 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(keyboard_check(ord("D"))&amp;&amp;x+32&lt;room_width) x += 5;
-if(keyboard_check(ord("A"))&amp;&amp;x-32&gt;0) x -= 5;
-if(keyboard_check(ord("W"))&amp;&amp;y-32&gt;0) y -= 5;
-if(keyboard_check(ord("S"))&amp;&amp;y+32&lt;room_height) y += 5;
+            <string>if(keyboard_check(vk_right)||keyboard_check(ord("D"))){
+    if(x+32&lt;room_width){
+        x += 5;
+    }
+}
+if(keyboard_check(vk_left)||keyboard_check(ord("A"))){
+    if(x-32&gt;0){
+        x -= 5;
+    }
+}
+if(keyboard_check(vk_up)||keyboard_check(ord("W"))){
+    if(y-32&gt;0){
+        y -= 5;
+    }
+}
+if(keyboard_check(vk_down)||keyboard_check(ord("S"))){
+    if(y+32&lt;room_height){
+        y += 5;
+    }
+}
 </string>
           </argument>
         </arguments>

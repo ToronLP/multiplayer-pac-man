@@ -12,6 +12,8 @@
     <sprite>sprites\sPac</sprite>
     <sprite>sprites\sGost1</sprite>
     <sprite>sprites\sGost2</sprite>
+    <sprite>sprites\sGhost3</sprite>
+    <sprite>sprites\sGhost4</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
