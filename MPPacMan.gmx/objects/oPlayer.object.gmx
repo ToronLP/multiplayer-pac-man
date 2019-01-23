@@ -49,7 +49,8 @@ sprite=sPac;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(keyboard_check(vk_right)||keyboard_check(ord("D"))){
+            <string>///Ein einfaches bewegungs System
+if(keyboard_check(vk_right)||keyboard_check(ord("D"))){
     if(x+32&lt;room_width){
         x += 5;
     }

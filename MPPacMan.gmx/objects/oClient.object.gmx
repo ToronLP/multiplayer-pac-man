@@ -76,10 +76,10 @@ if(testvar == ZUSCHAUER_CODE){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(zuschauer==false){
-    client_send_movement();
+            <string>if(zuschauer==false){       //Wenn der Client kein zuschauer ist
+    client_send_movement(); //Die bewegung des Clients wird gesendet
 }
-alarm[0] = UPDATE_SPEED;
+alarm[0] = UPDATE_SPEED;    //UPDATE_SPEED steht für die häufigkeit in der die Packete gesendet werden.
 </string>
           </argument>
         </arguments>

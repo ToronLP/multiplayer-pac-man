@@ -52,7 +52,7 @@ client_id_current = clientObject.client_id;                                     
 
 while(true){
     var
-    message_id = buffer_read(buffer, buffer_u8);                                        //Es wird geladen was Passiert ob siche in Client verbindet oder ob ein Client sich bewegt
+    message_id = buffer_read(buffer, buffer_u8);                                        //Es wird geladen was Passiert ob sich ein Client verbindet oder ob ein Client sich bewegt
     
     //welcher status ist aktiv
     switch(message_id){
@@ -65,7 +65,7 @@ while(true){
                              buffer_u16);                                               //Da der raum größer als 256 ist u16
             
             buffer_seek(send_buffer, buffer_seek_start, 0);                             //Das Schreiben wird am anfang des buffers geschehen.
-            buffer_write(send_buffer, buffer_u8, MESSAGE_MOVE);                         //Der status MOVE wird in den send_buffer gespeichert, damit der verarbeitende Client weis das es eine Bewegung/veränderung im raum ist.
+            buffer_write(send_buffer, buffer_u8, MESSAGE_MOVE);                         //Der status MOVE wird in den send_buffer gespeichert, damit der verarbeitende Client weis das es eine Bewegung/veränderung im Raum ist.
             buffer_write(send_buffer, buffer_u16, client_id_current);                   //Die Client_id wird in den send_buffer gespeichert, damit der Client der sich bewegt identifiziert werden kann.
             buffer_write(send_buffer, buffer_u16, xx);                                  //Die neue x position des Clients wird in den send_buffer gespeichert, damit der Client sich bewegt.
             buffer_write(send_buffer, buffer_u16, yy);                                  //Die neue y position des Clients wird in den send_buffer gespeichert, damit der Client sich bewegt.
@@ -73,9 +73,9 @@ while(true){
             with(oServerClient){
                 //Abfrage, damit nicht an sich selber gesendet wird.
                 if(client_id != client_id_current){
-                    network_send_raw(self.socket_id, 
-                                     other.send_buffer, 
-                                     buffer_tell(other.send_buffer));
+                    network_send_raw(self.socket_id,                                    //Die socket_ids werden vom Server Client genommen da er diese schon hat.
+                                     other.send_buffer,                                 //Der send_buffer des aktuellen Clients wird gesendet.
+                                     buffer_tell(other.send_buffer));                   //Die länge des send_buffers.
                 }
             }
         break;

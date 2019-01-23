@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>txt = "";
+            <string>txt = "";   //Die Variable wird beim erzäugen für jeden einzelnen Butten fest gelegt.
 </string>
           </argument>
         </arguments>
@@ -48,20 +48,20 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(txt == "create server"){
-    with(oButton) instance_destroy();
+            <string>if(txt == "create server"){                         //Wenn der text im Button Create Server ist
+    with(oButton) instance_destroy();               //Alle Knöpfe zerstören
     
-    instance_create(0,0,oServer);
-} else if(txt == "join server"){
-    with(oButton) instance_destroy();
+    instance_create(0,0,oServer);                   //Einen server aufbauen
+} else if(txt == "join server"){                    //Wenn der text im Button Join Server ist
+    with(oButton) instance_destroy();               //Alle Knöpfe zerstören
     
-    instance_create(0,0, oClient);
-    instance_create(100,100, oPlayer);
-} else if(txt == "Zuschauen"){
-    with(oButton) instance_destroy();
+    instance_create(0,0, oClient);                  //Ein Client Objekt erzäugen
+    instance_create(100,100, oPlayer);              //Einen Player erzäugen
+} else if(txt == "Zuschauen"){                      //Wenn der text im Button Zuschauen ist
+    with(oButton) instance_destroy();               //Alle Knöpfe zerstören
     
-    instance_create(0,0, oClient);
-    instance_create(-100,-100, oZuschauer);
+    instance_create(0,0, oClient);                  //Ein Client Objekt erzäugen
+    instance_create(-100,-100, oZuschauer);         //Einen Zuschauer erzäugen
 }
 </string>
           </argument>
@@ -86,14 +86,15 @@
           <argument>
             <kind>1</kind>
             <string>draw_self();
+//Wenn der Mauszeiger im Viereck ist sollen ein Pac links und ein Pac rechtgs gemalt werden.
 if(point_in_rectangle(mouse_x, mouse_y, x-96, y-32, x+96, y+32)){
     draw_sprite(sPac, 0, x-120, y);
     draw_sprite(sPac, 1, x+120, y);
 }
-draw_set_colour(c_white);
-draw_set_halign(fa_center);
-draw_set_valign(fa_center);
-draw_text(x, y, txt);
+draw_set_colour(c_white);               //Die Textfarbe ist weis
+draw_set_halign(fa_center);             //Der Text wird horizontal in der mitte des Knopfes gemalt
+draw_set_valign(fa_center);             //Der Text wird vertikal in der mitte des Knopfes gemalt
+draw_text(x, y, txt);                   //Der Text der beim erzäugen gesetzt wurde wird gemalt
 </string>
           </argument>
         </arguments>
