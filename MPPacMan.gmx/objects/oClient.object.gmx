@@ -102,9 +102,9 @@ alarm[0] = UPDATE_SPEED;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(async_load[? "type"]){
-    case network_type_data:
-        client_handle_message(async_load[? "buffer"]);
+            <string>switch(async_load[? "type"]){                               //Auswahl der verschiedenen Netzwerk Aktionen.
+    case network_type_data:                                 //Wenn ein Paket gesendet wird
+        client_handle_message(async_load[? "buffer"]);      //Der buffer in dem die informationen stehen
     break;
 }
 </string>

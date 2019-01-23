@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>name = "";
+sprite = sPac;
 </string>
           </argument>
         </arguments>

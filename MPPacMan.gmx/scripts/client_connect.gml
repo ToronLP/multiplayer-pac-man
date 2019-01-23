@@ -2,17 +2,18 @@
 ///client_connect(ip, port, name)
 
 var
-ip = argument0,
-port = argument1,
-name = argument2;
+ip = argument0,                                             //Die IP zu der der Client versucht zu connecten
+port = argument1,                                           //Der Port aud dem der Server ereichbar ist
+name = argument2;                                           //Der name das Spielers
 
-socket = network_create_socket(network_socket_tcp);
-var connect = network_connect_raw(socket, ip, port);
+socket = network_create_socket(network_socket_tcp);         //Das Client socket erstellen
+var connect = network_connect_raw(socket, ip, port);        //Eine connection mit dem socket zum Server aufbauen
 
-send_buffer = buffer_create(256, buffer_fixed, 1);
+send_buffer = buffer_create(256, buffer_fixed, 1);          //Der buffer für die zu sendenden sachen.
 
-clientmap = ds_map_create();
+clientmap = ds_map_create();                                //Eine Clientmap zum speichern der anderen Clients
 
+//Abfrage ob eine Connection hergestellt werden konnte.
 if(connect < 0){
     show_error("Could not connect to Server!", true);
 }
@@ -25,18 +26,18 @@ network_send_raw(socket, send_buffer, buffer_tell(send_buffer));
 #define client_disconnect
 ///client_disconnect()
 
-ds_map_destroy(clientmap);
-network_destroy(socket);
+ds_map_destroy(clientmap);  //Löschen der Map
+network_destroy(socket);    //Löschen der socket
 
 #define client_handle_message
 ///client_handle_message(buffer)
 
 var
-buffer = argument0;
+buffer = argument0;                                             //Der buffer aus dem die infos gelesen werden
 
 while(true){
     var
-    message_id = buffer_read(buffer, buffer_u8);
+    message_id = buffer_read(buffer, buffer_u8);                //
     
     switch(message_id){
         case MESSAGE_MOVE:
@@ -60,11 +61,13 @@ while(true){
         break;
         case MESSAGE_JOIN:
             var
+            playersprite = buffer_read(buffer, buffer_string);
             client = buffer_read(buffer, buffer_u16);
             username = buffer_read(buffer, buffer_string);
             clientObject = client_get_object(client);
             
             clientObject.name = username;
+            clientObject.sprite = buffer_read(buffer, buffer_u8);
         break;
         case MESSAGE_LEAVE:
             var

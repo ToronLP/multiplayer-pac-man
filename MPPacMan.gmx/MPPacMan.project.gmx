@@ -10,8 +10,8 @@
     <sprite>sprites\sClient</sprite>
     <sprite>sprites\sButton</sprite>
     <sprite>sprites\sPac</sprite>
-    <sprite>sprites\sGost1</sprite>
-    <sprite>sprites\sGost2</sprite>
+    <sprite>sprites\sGhost1</sprite>
+    <sprite>sprites\sGhost2</sprite>
     <sprite>sprites\sGhost3</sprite>
     <sprite>sprites\sGhost4</sprite>
   </sprites>

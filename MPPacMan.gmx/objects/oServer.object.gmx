@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>server = server_create(9000);
+            <string>server = server_create(9000);   //Script aufrufen und den Server auf Port 9000 starten
+
 x = room_width/2;
 y = 40;
 </string>
@@ -50,18 +51,21 @@ y = 40;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(async_load[? "type"]){
-    case network_type_connect:
-    case network_type_non_blocking_connect:
-        server_handle_connect(async_load[? "socket"]);
+            <string>switch(async_load[? "type"]){                                                   //Auswahl der verschiedenen Netzwerk Aktionen.
+    case network_type_connect:                                                  //Wenn ein neuer Client Connected
+    case network_type_non_blocking_connect:                                     //Wenn ein neuer Client in besonderer form Connected
+        server_handle_connect(async_load[? "socket"]);                          //Script aufrufen um zum Server zu Connecten. Übergeben wird das socket der Connection. 
+                                                                                //Socket wird zum identifizieren einer Connection benutzt werden.
     break;
     
-    case network_type_data:
-        server_handle_message(async_load[? "id"], async_load[? "buffer"]);
+    case network_type_data:                                                     //Wenn ein Paket gesendet wird
+        server_handle_message(async_load[? "id"],                               //Die id des Clients um den Client zu identifizieren
+                              async_load[? "buffer"]);                          //Im buffer befinden sich die zu sendenden informationen.
     break;
     
-    case network_type_disconnect:
-        server_handle_disconnect(async_load[? "socket"]);
+    case network_type_disconnect:                                               //Wenn ein Client disconnencted
+        server_handle_disconnect(async_load[? "socket"]);                       //Script aufrufen um den Server zu verlassen. Übergeben wird das socket der Connection. 
+                                                                                //Socket wird zum identifizieren einer Connection benutzt werden.
     break;
 }
 </string>
