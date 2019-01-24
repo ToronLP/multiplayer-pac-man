@@ -31,6 +31,10 @@ testvar = get_string_async("Please enter a username", "");
 if(testvar == ZUSCHAUER_CODE){
     zuschauer=true;
 }
+var
+sprite = sGhost2;
+
+client_send_sprite(sprite);
 </string>
           </argument>
         </arguments>

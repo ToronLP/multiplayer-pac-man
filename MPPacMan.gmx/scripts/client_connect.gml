@@ -24,6 +24,8 @@ network_send_raw(socket,                                    //Die neue Soket wir
                  send_buffer,                               //Der send_buffer wird gesendet
                  buffer_tell(send_buffer));                 //Die länge des send_buffer wird ermittelt
 
+my_client_id = -1;
+
 #define client_disconnect
 ///client_disconnect()
 
@@ -41,6 +43,9 @@ while(true){
     message_id = buffer_read(buffer, buffer_u8);                        //Es wird geladen was Passiert ist ob sich ein Client verbunden hat oder ob ein Client sich bewegt hat
     
     switch(message_id){
+        case MESSAGE_GETID:
+            my_client_id = buffer_read(buffer, buffer_u16);
+        break;
         case MESSAGE_MOVE:
             var                                                         //Der Buffer der gesendet wurde muss in der gleichen Reihenfolge ausgelesen werden wie er geschrieben wurde.
             client = buffer_read(buffer, buffer_u16);                   //Den Client aus dem buffer holen
@@ -104,6 +109,13 @@ network_send_raw(socket, send_buffer, buffer_tell(send_buffer));    //Das eigene
 
 var
 client_id = argument0;
+
+if(client_id == my_client_id){
+    if(!instance_exists(oPlayer)){
+        instance_create(0, 0, oPlayer);
+    }
+    return oPlayer.id;
+}
 
 if(ds_map_exists(clientmap, string(client_id))){        //Wenn der Client schon ein mal eine message vom anderen Client bekommen hat.
     return clientmap[? string(client_id)];              //Die map des Clients zurück geben
