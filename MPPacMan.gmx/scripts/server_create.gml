@@ -10,9 +10,12 @@ server = network_create_server_raw( network_socket_tcp,     //Protokoll TCP ODER
                                     port,                   //Port auf dem der Server erichbar ist.
                                     MAX_ANZ_CLIENTS);       //Maximale anzhal an Clients auf dem Server
 clientmap = ds_map_create();                                //Initialisieren der clientmap
-client_id_counter = 0;
-actual_connected_clients = 0;
-
+client_id_counter = 0;                                      //Der Counter der zur id vergebung benutzt wird
+actual_connected_clients = 0;                               //Der Counter der Verwendet wird um an zu zeigen wie viele spieler auf dem Server sind
+//spriteChange[5] = "";
+/*for(i = 0; i < array_length_1d(spriteChange); i++){
+    spriteChange[i] = "";
+}*/
 
 send_buffer = buffer_create(256, buffer_fixed, 1);          //Der buffer in den die sachen zum senden geschrieben werden
 
@@ -32,6 +35,28 @@ socket_id = argument0;                          //Variable wird gesetzt biem auf
 l = instance_create(0, 0, oServerClient);       //Erstellen eines ServerClient object
 l.socket_id = socket_id;                        //Dien socket_id wird dem neuen ServerClient object zugewiesen
 l.client_id = client_id_counter++;              //Die Client_id wird benutzt um den client idenfizieren zu können da die Socket_id random ist.
+/*for(i = 0; i < array_length_1d(spriteChange); i++){
+    if(spriteChange[i]!="used"){
+        switch(i){
+            case 0:
+                l.sprite = sPac;
+            break;
+            case 1:
+                l.sprite = sGhost1;
+            break;
+            case 2:
+                l.sprite = sGhost2;
+            break;
+            case 3:
+                l.sprite = sGhost3;
+            break;
+            case 4:
+                l.sprite = sGhost4;
+            break;
+        }
+        spriteChange[i] = "used";
+    }
+}*/
 
 //Ein int ist 65000+ groß damit der int nicht überläuft wird er wieder zurückgesetzt
 if(client_id_counter >= 65000){                 
@@ -69,6 +94,7 @@ while(true){
             buffer_write(send_buffer, buffer_u16, client_id_current);                   //Die Client_id wird in den send_buffer gespeichert, damit der Client der sich bewegt identifiziert werden kann.
             buffer_write(send_buffer, buffer_u16, xx);                                  //Die neue x position des Clients wird in den send_buffer gespeichert, damit der Client sich bewegt.
             buffer_write(send_buffer, buffer_u16, yy);                                  //Die neue y position des Clients wird in den send_buffer gespeichert, damit der Client sich bewegt.
+            //buffer_write(send_buffer, buffer_string, clientObject.sprite);
             
             with(oServerClient){
                 //Abfrage, damit nicht an sich selber gesendet wird.
@@ -81,32 +107,34 @@ while(true){
         break;
         //Wenn ein Client Connected
         case MESSAGE_JOIN:
-            username = buffer_read(buffer, buffer_string);
-            clientObject.name = username;
+            username = buffer_read(buffer, buffer_string);                              //Den Benutzernamen aus dem buffer speichern
+            clientObject.name = username;                                               //Den namen des Objektes setzen
             
-            clientObject.sprite = sGhost1;
+            buffer_seek(send_buffer, buffer_seek_start, 0);                             //Das Schreiben wird am anfang des buffers geschehen.
+            buffer_write(send_buffer, buffer_u8, MESSAGE_JOIN);                         //Der status JOIN wird in den send_buffer gespeichert, damit der verarbeitende Client weis das es eine Bewegung/veränderung im Raum ist.
+            buffer_write(send_buffer, buffer_u16, client_id_current);                   //Die Client_id wird in den send_buffer gespeichert, damit der Client der dem Speil beitrit identifiziert werden kann.
+            buffer_write(send_buffer, buffer_string, username);                         //Der Username wird in den send_buffer gespeichert, damit die anderen Clients den Benutzernamen das neuen Clients sehen können.              //
             
-            buffer_seek(send_buffer, buffer_seek_start, 0);
-            buffer_write(send_buffer, buffer_u8, MESSAGE_JOIN);
-            buffer_write(send_buffer, buffer_u16, client_id_current);
-            buffer_write(send_buffer, buffer_string, username);
-            buffer_write(send_buffer, buffer_u8, clientObject.sprite);
-            
-            //sending the newly joining name to all other clients
+            //Den neuen Namen an alle anderen Clients senden
             with(oServerClient){
+            //Abfrage, damit nicht an sich selber gesendet wird.
                 if(client_id != client_id_current){
-                    network_send_raw(self.socket_id, other.send_buffer, buffer_tell(other.send_buffer));
+                    network_send_raw(self.socket_id,                                    //Die socket_ids werden vom Server Client genommen da er diese schon hat.
+                                     other.send_buffer,                                 //Der send_buffer des aktuellen Clients wird gesendet. 
+                                     buffer_tell(other.send_buffer));                   //Die länge des send_buffers.
                 }
             }
             
-            //send the newly joined client the name of all other clients
+            //Dem neuen Client die namen aller anderen senden.
             with(oServerClient){
                 if(client_id != client_id_current){
-                    buffer_seek(other.send_buffer, buffer_seek_start, 0);
-                    buffer_write(other.send_buffer, buffer_u8, MESSAGE_JOIN);
-                    buffer_write(other.send_buffer, buffer_u16, client_id);
-                    buffer_write(other.send_buffer, buffer_string, name);
-                    network_send_raw(socket_id, other.send_buffer, buffer_tell(other.send_buffer));
+                    buffer_seek(other.send_buffer, buffer_seek_start, 0);               //Das Schreiben wird am anfang des buffers geschehen.
+                    buffer_write(other.send_buffer, buffer_u8, MESSAGE_JOIN);           //Der status JOIN wird in den send_buffer gespeichert, damit der verarbeitende Client weis das es eine Bewegung/veränderung im Raum ist.
+                    buffer_write(other.send_buffer, buffer_u16, client_id);             //Die Client_ids der anderen Clients
+                    buffer_write(other.send_buffer, buffer_string, name);               //Die namen der anderen Clients
+                    network_send_raw(socket_id,                                         //Die socket_ids werden vom Server Client genommen da er diese schon hat.
+                                     other.send_buffer,                                 //Der send_buffer des aktuellen Clients wird gesendet. 
+                                     buffer_tell(other.send_buffer));                   //Die länge des send_buffers.
                 }
             }
         break;

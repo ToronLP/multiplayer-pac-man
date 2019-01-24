@@ -12,16 +12,17 @@ var connect = network_connect_raw(socket, ip, port);        //Eine connection mi
 send_buffer = buffer_create(256, buffer_fixed, 1);          //Der buffer für die zu sendenden sachen.
 
 clientmap = ds_map_create();                                //Eine Clientmap zum speichern der anderen Clients
-
 //Abfrage ob eine Connection hergestellt werden konnte.
 if(connect < 0){
     show_error("Could not connect to Server!", true);
 }
 
 buffer_seek(send_buffer, buffer_seek_start, 0);             //Das Schreiben wird am anfang des buffers geschehen.
-buffer_write(send_buffer, buffer_u8, MESSAGE_JOIN);
-buffer_write(send_buffer, buffer_string, name);
-network_send_raw(socket, send_buffer, buffer_tell(send_buffer));
+buffer_write(send_buffer, buffer_u8, MESSAGE_JOIN);         //Der Buffer bekommt den status JOIN damit Server und Client wissen was sie machen müssen.
+buffer_write(send_buffer, buffer_string, name);             //Der Buffer bekommt den name des neuen Clients
+network_send_raw(socket,                                    //Die neue Soket wird gesendet
+                 send_buffer,                               //Der send_buffer wird gesendet
+                 buffer_tell(send_buffer));                 //Die länge des send_buffer wird ermittelt
 
 #define client_disconnect
 ///client_disconnect()
@@ -33,51 +34,51 @@ network_destroy(socket);    //Löschen der socket
 ///client_handle_message(buffer)
 
 var
-buffer = argument0;                                             //Der buffer aus dem die infos gelesen werden
+buffer = argument0;                                                     //Der buffer aus dem die infos gelesen werden
 
 while(true){
     var
-    message_id = buffer_read(buffer, buffer_u8);                //Es wird geladen was Passiert ist ob sich ein Client verbunden hat oder ob ein Client sich bewegt hat
+    message_id = buffer_read(buffer, buffer_u8);                        //Es wird geladen was Passiert ist ob sich ein Client verbunden hat oder ob ein Client sich bewegt hat
     
     switch(message_id){
         case MESSAGE_MOVE:
-            var                                                 //Der Buffer der gesendet wurde muss in der gleichen Reihenfolge ausgelesen werden wie er geschrieben wurde.
-            client = buffer_read(buffer, buffer_u16);           //Den Client aus dem buffer holen
-            xx = buffer_read(buffer, buffer_u16);               //Die x position des Clients holen
-            yy = buffer_read(buffer, buffer_u16);               //Die y position des Clients holen
-            clientObject = client_get_object(client);           //Script zur bestimmung welcher client gemeint ist
+            var                                                         //Der Buffer der gesendet wurde muss in der gleichen Reihenfolge ausgelesen werden wie er geschrieben wurde.
+            client = buffer_read(buffer, buffer_u16);                   //Den Client aus dem buffer holen
+            xx = buffer_read(buffer, buffer_u16);                       //Die x position des Clients holen
+            yy = buffer_read(buffer, buffer_u16);                       //Die y position des Clients holen
+            //actsprite = buffer_read(buffer, buffer_string);
+            clientObject = client_get_object(client);                   //Script zur bestimmung welcher client gemeint ist
             
-            clientObject.tim = 0;                               //
-            clientObject.prx = clientObject.x;                  //
-            clientObject.pry = clientObject.y;                  //
-            clientObject.tox = xx;                              //Setzen der x position des bewegten clients
-            clientObject.toy = yy;                              //Setzen der y position des bewegten clients
+            clientObject.tim = 0;                                       //
+            clientObject.prx = clientObject.x;                          //
+            clientObject.pry = clientObject.y;                          //
+            clientObject.tox = xx;                                      //Setzen der x position des bewegten clients
+            clientObject.toy = yy;                                      //Setzen der y position des bewegten clients
+            //clientObject.sprite = actsprite;
             
             with(oServerClient){
                 if(client_id != client_is_current){
-                    network_send_raw(self.socket_id,            //Die socket_ids werden vom Server Client genommen da er diese schon hat.
-                                     other.send_buffer,         //Der send_buffer des aktuellen Clients wird gesendet.
-                                     buffer_tell(other.send_buffer));//Die länge des send_buffers.
+                    network_send_raw(self.socket_id,                    //Die socket_ids werden vom Server Client genommen da er diese schon hat.
+                                     other.send_buffer,                 //Der send_buffer des aktuellen Clients wird gesendet.
+                                     buffer_tell(other.send_buffer));   //Die länge des send_buffers.
                 }
             }
         break;
         case MESSAGE_JOIN:
             var
-            playersprite = buffer_read(buffer, buffer_string);
-            client = buffer_read(buffer, buffer_u16);
-            username = buffer_read(buffer, buffer_string);
-            clientObject = client_get_object(client);
+            client = buffer_read(buffer, buffer_u16);                   //Den Client aus dem buffer holen
+            username = buffer_read(buffer, buffer_string);              //Den username aus dem buffer holen
+            clientObject = client_get_object(client);                   //Script zur bestimmung welcher client gemeint ist
             
-            clientObject.name = username;
-            clientObject.sprite = buffer_read(buffer, buffer_u8);
+            clientObject.name = username;                               //Den namen des Clients setzen
         break;
         case MESSAGE_LEAVE:
             var
-            client = buffer_read(buffer, buffer_u16);
-            tempObject = client_get_object(client);
+            client = buffer_read(buffer, buffer_u16);                   //Den Client aus dem buffer holen
+            tempObject = client_get_object(client);                     //Script zur bestimmung welcher client gemeint ist
             
             with(tempObject){
-                instance_destroy();
+                instance_destroy();                                     //Das Object welches Disconnected löschen
             }
         break;
     }

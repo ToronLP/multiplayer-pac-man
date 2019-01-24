@@ -32,7 +32,6 @@ pry = y;
 tox = x;
 toy = y;
 
-sprite = sPac;
 </string>
           </argument>
         </arguments>
@@ -109,7 +108,6 @@ if(image_index&lt;=8){
             <kind>1</kind>
             <string>if(name!=ZUSCHAUER_CODE){
     draw_self();
-    sprite_assign(0, sprite);
     draw_set_color(c_white);
     draw_set_halign(fa_center);
     draw_set_valign(fa_center);

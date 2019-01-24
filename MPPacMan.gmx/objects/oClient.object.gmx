@@ -129,10 +129,10 @@ alarm[0] = UPDATE_SPEED;    //UPDATE_SPEED steht für die häufigkeit in der die
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(!connected){
-    connected = true;
-    client_connect(SERVER_IP, 9000, async_load[? "result"]);
-    alarm[0] = UPDATE_SPEED;
+            <string>if(!connected){                                                 //Wenn noch keine Connection aufgebaut wurde
+    connected = true;                                           //Den aufbau der Connection bestätigen.
+    client_connect(SERVER_IP, 9000, async_load[? "result"]);    //Die ServerIP, Der Port, Die eingabe aus dem Popup
+    alarm[0] = UPDATE_SPEED;                                    //Der Alarm wird wieder auf die Update_SPEED gesetzt
 }
 </string>
           </argument>

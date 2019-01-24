@@ -26,7 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>zuschauer = false;
-sprite=sPac;
 </string>
           </argument>
         </arguments>
@@ -93,8 +92,6 @@ if(keyboard_check(vk_down)||keyboard_check(ord("S"))){
           <argument>
             <kind>1</kind>
             <string>draw_self();
-
-sprite_assign(0, sprite)
 </string>
           </argument>
         </arguments>
