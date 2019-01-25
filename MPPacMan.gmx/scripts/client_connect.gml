@@ -24,14 +24,6 @@ network_send_raw(socket,                                    //Die neue Soket wir
                  send_buffer,                               //Der send_buffer wird gesendet
                  buffer_tell(send_buffer));                 //Die länge des send_buffer wird ermittelt
 
-my_client_id = -1;
-
-#define client_disconnect
-///client_disconnect()
-
-ds_map_destroy(clientmap);  //Löschen der Map
-network_destroy(socket);    //Löschen der socket
-
 #define client_handle_message
 ///client_handle_message(buffer)
 
@@ -43,15 +35,12 @@ while(true){
     message_id = buffer_read(buffer, buffer_u8);                        //Es wird geladen was Passiert ist ob sich ein Client verbunden hat oder ob ein Client sich bewegt hat
     
     switch(message_id){
-        case MESSAGE_GETID:
-            my_client_id = buffer_read(buffer, buffer_u16);
-        break;
         case MESSAGE_MOVE:
             var                                                         //Der Buffer der gesendet wurde muss in der gleichen Reihenfolge ausgelesen werden wie er geschrieben wurde.
             client = buffer_read(buffer, buffer_u16);                   //Den Client aus dem buffer holen
             xx = buffer_read(buffer, buffer_u16);                       //Die x position des Clients holen
             yy = buffer_read(buffer, buffer_u16);                       //Die y position des Clients holen
-            //actsprite = buffer_read(buffer, buffer_string);
+            //actsprite = buffer_read(buffer, buffer_string);             //Den Sprite aus dem buffer holen
             clientObject = client_get_object(client);                   //Script zur bestimmung welcher client gemeint ist
             
             clientObject.tim = 0;                                       //
@@ -59,6 +48,7 @@ while(true){
             clientObject.pry = clientObject.y;                          //
             clientObject.tox = xx;                                      //Setzen der x position des bewegten clients
             clientObject.toy = yy;                                      //Setzen der y position des bewegten clients
+            //clientObject.sprite = actsprite;                            //Den sprite des Clients setzen
             //clientObject.sprite = actsprite;
             
             with(oServerClient){
@@ -74,6 +64,7 @@ while(true){
             client = buffer_read(buffer, buffer_u16);                   //Den Client aus dem buffer holen
             username = buffer_read(buffer, buffer_string);              //Den username aus dem buffer holen
             clientObject = client_get_object(client);                   //Script zur bestimmung welcher client gemeint ist
+            
             
             clientObject.name = username;                               //Den namen des Clients setzen
         break;
@@ -93,6 +84,12 @@ while(true){
     }
 }
 
+#define client_disconnect
+///client_disconnect()
+
+ds_map_destroy(clientmap);  //Löschen der Map
+network_destroy(socket);    //Löschen der socket
+
 #define client_send_movement
 ///client_send_movement()
 
@@ -110,17 +107,18 @@ network_send_raw(socket, send_buffer, buffer_tell(send_buffer));    //Das eigene
 var
 client_id = argument0;
 
-if(client_id == my_client_id){
-    if(!instance_exists(oPlayer)){
-        instance_create(0, 0, oPlayer);
-    }
-    return oPlayer.id;
-}
-
 if(ds_map_exists(clientmap, string(client_id))){        //Wenn der Client schon ein mal eine message vom anderen Client bekommen hat.
     return clientmap[? string(client_id)];              //Die map des Clients zurück geben
 }else{                                                  //Wenn der Client noch nie eine message des anderen Clients bekommen hat.
-    var l = instance_create(0, 0, oOtherClient);        //Ein neues Object erzäugen für den anderen Client
+    if(!instance_exists(oOtherClient)){
+        var l = instance_create(0, 0, oOtherClient);    //Ein neues Object erzäugen für den anderen Client
+    } else if(!instance_exists(oOtherClient2)){
+        var l = instance_create(0, 0, oOtherClient2);   //Ein neues Object erzäugen für den anderen Client
+    } else if(!instance_exists(oOtherClient3)){
+        var l = instance_create(0, 0, oOtherClient3);   //Ein neues Object erzäugen für den anderen Client
+    } else if(!instance_exists(oOtherClient4)){
+        var l = instance_create(0, 0, oOtherClient4);   //Ein neues Object erzäugen für den anderen Client
+    }
     clientmap[? string(client_id)] = l;                 //Dem neuen Client eine map zuweisen
     return l;                                           //Den neuen Client zurückgeben
 }

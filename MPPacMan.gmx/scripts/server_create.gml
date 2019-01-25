@@ -12,6 +12,10 @@ server = network_create_server_raw( network_socket_tcp,     //Protokoll TCP ODER
 clientmap = ds_map_create();                                //Initialisieren der clientmap
 client_id_counter = 0;                                      //Der Counter der zur id vergebung benutzt wird
 actual_connected_clients = 0;                               //Der Counter der Verwendet wird um an zu zeigen wie viele spieler auf dem Server sind
+/*spriteChange[5] = "";
+for(i = 0; i < array_length_1d(spriteChange); i++){
+    spriteChange[i] = "";
+}*/
 
 send_buffer = buffer_create(256, buffer_fixed, 1);          //Der buffer in den die sachen zum senden geschrieben werden
 
@@ -28,11 +32,10 @@ return server;                                              //Server zurück geb
 var
 socket_id = argument0;                          //Variable wird gesetzt biem aufrufen des Scripts
 
-var
 l = instance_create(0, 0, oServerClient);       //Erstellen eines ServerClient object
-
 l.socket_id = socket_id;                        //Dien socket_id wird dem neuen ServerClient object zugewiesen
 l.client_id = client_id_counter++;              //Die Client_id wird benutzt um den client idenfizieren zu können da die Socket_id random ist.
+/**/
 
 //Ein int ist 65000+ groß damit der int nicht überläuft wird er wieder zurückgesetzt
 if(client_id_counter >= 65000){                 
@@ -41,11 +44,6 @@ if(client_id_counter >= 65000){
 
 clientmap[? string(socket_id)] = l;             //erstellen einer Client Map um alle client Objecte zu speichern
 actual_connected_clients++;                     //Bei einem Connect wird die Variable für schön hoch gezählt.
-
-buffer_seek(send_buffer, buffer_seek_start, 0);
-buffer_write(send_buffer, buffer_u8, MESSAGE_GETID);
-buffer_write(send_buffer, buffer_u16, l.client_id);
-network_send_raw(socket_id, send_buffer, buffer_tell(send_buffer));
 
 #define server_handle_message
 ///server_handle_message(socket_id, buffer);
@@ -69,12 +67,37 @@ while(true){
                              buffer_u16);                                               //Da der raum größer als 256 ist u16
             yy = buffer_read(buffer,                                                    //Aus dem buffer "buffer" die y position auslesen
                              buffer_u16);                                               //Da der raum größer als 256 ist u16
+                             var
+            /*actsprite = "";*/
             
             buffer_seek(send_buffer, buffer_seek_start, 0);                             //Das Schreiben wird am anfang des buffers geschehen.
             buffer_write(send_buffer, buffer_u8, MESSAGE_MOVE);                         //Der status MOVE wird in den send_buffer gespeichert, damit der verarbeitende Client weis das es eine Bewegung/veränderung im Raum ist.
             buffer_write(send_buffer, buffer_u16, client_id_current);                   //Die Client_id wird in den send_buffer gespeichert, damit der Client der sich bewegt identifiziert werden kann.
             buffer_write(send_buffer, buffer_u16, xx);                                  //Die neue x position des Clients wird in den send_buffer gespeichert, damit der Client sich bewegt.
             buffer_write(send_buffer, buffer_u16, yy);                                  //Die neue y position des Clients wird in den send_buffer gespeichert, damit der Client sich bewegt.
+            /*for(i = 0; i < array_length_1d(spriteChange); i++){
+                if(spriteChange[i]!="used"){
+                    switch(i){
+                        case 0:
+                            clientObject.sprite = sPac;
+                        break;
+                        case 1:
+                            clientObject.sprite = sGhost1;
+                        break;
+                        case 2:
+                            clientObject.sprite = sGhost2;
+                        break;
+                        case 3:
+                            clientObject.sprite = sGhost3;
+                        break;
+                        case 4:
+                            clientObject.sprite = sGhost4;
+                        break;
+                    }
+                    spriteChange[i] = "used";
+                }
+            }*/
+            //buffer_write(send_buffer, buffer_string, actsprite);
             //buffer_write(send_buffer, buffer_string, clientObject.sprite);
             
             with(oServerClient){
@@ -94,8 +117,7 @@ while(true){
             buffer_seek(send_buffer, buffer_seek_start, 0);                             //Das Schreiben wird am anfang des buffers geschehen.
             buffer_write(send_buffer, buffer_u8, MESSAGE_JOIN);                         //Der status JOIN wird in den send_buffer gespeichert, damit der verarbeitende Client weis das es eine Bewegung/veränderung im Raum ist.
             buffer_write(send_buffer, buffer_u16, client_id_current);                   //Die Client_id wird in den send_buffer gespeichert, damit der Client der dem Speil beitrit identifiziert werden kann.
-            buffer_write(send_buffer, buffer_string, username);                         //Der Username wird in den send_buffer gespeichert, damit die anderen Clients den Benutzernamen das neuen Clients sehen können.              //
-            
+            buffer_write(send_buffer, buffer_string, username);                         //Der Username wird in den send_buffer gespeichert, damit die anderen Clients den Benutzernamen das neuen Clients sehen können.
             //Den neuen Namen an alle anderen Clients senden
             with(oServerClient){
             //Abfrage, damit nicht an sich selber gesendet wird.
