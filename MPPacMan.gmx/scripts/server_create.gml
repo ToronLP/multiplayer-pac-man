@@ -12,8 +12,8 @@ server = network_create_server_raw( network_socket_tcp,     //Protokoll TCP ODER
 clientmap = ds_map_create();                                //Initialisieren der clientmap
 client_id_counter = 0;                                      //Der Counter der zur id vergebung benutzt wird
 actual_connected_clients = 0;                               //Der Counter der Verwendet wird um an zu zeigen wie viele spieler auf dem Server sind
-/*spriteChange[5] = "";
-for(i = 0; i < array_length_1d(spriteChange); i++){
+spriteChange[5] = "";
+/*for(i = 0; i < array_length_1d(spriteChange); i++){
     spriteChange[i] = "";
 }*/
 
@@ -46,7 +46,7 @@ clientmap[? string(socket_id)] = l;             //erstellen einer Client Map um 
 actual_connected_clients++;                     //Bei einem Connect wird die Variable für schön hoch gezählt.
 
 #define server_handle_message
-///server_handle_message(socket_id, buffer);
+ ///server_handle_message(socket_id, buffer);
 
 var
 socket_id = argument0,                                                                  //Variable wird gesetzt biem aufrufen des Scripts zur identifizierung der Connection
@@ -112,12 +112,14 @@ while(true){
         //Wenn ein Client Connected
         case MESSAGE_JOIN:
             username = buffer_read(buffer, buffer_string);                              //Den Benutzernamen aus dem buffer speichern
+            yoursprite = buffer_read(buffer, buffer_string);                            //Den Sprite aus dem Buffer speichern
             clientObject.name = username;                                               //Den namen des Objektes setzen
             
             buffer_seek(send_buffer, buffer_seek_start, 0);                             //Das Schreiben wird am anfang des buffers geschehen.
             buffer_write(send_buffer, buffer_u8, MESSAGE_JOIN);                         //Der status JOIN wird in den send_buffer gespeichert, damit der verarbeitende Client weis das es eine Bewegung/veränderung im Raum ist.
             buffer_write(send_buffer, buffer_u16, client_id_current);                   //Die Client_id wird in den send_buffer gespeichert, damit der Client der dem Speil beitrit identifiziert werden kann.
             buffer_write(send_buffer, buffer_string, username);                         //Der Username wird in den send_buffer gespeichert, damit die anderen Clients den Benutzernamen das neuen Clients sehen können.
+            buffer_write(send_buffer, buffer_string, yoursprite);                       //Der Sprite wird in den send_buffer gespeichert, damit die anderen Clients den Sprite des neuen Clients sehen können.
             //Den neuen Namen an alle anderen Clients senden
             with(oServerClient){
             //Abfrage, damit nicht an sich selber gesendet wird.
@@ -135,6 +137,7 @@ while(true){
                     buffer_write(other.send_buffer, buffer_u8, MESSAGE_JOIN);           //Der status JOIN wird in den send_buffer gespeichert, damit der verarbeitende Client weis das es eine Bewegung/veränderung im Raum ist.
                     buffer_write(other.send_buffer, buffer_u16, client_id);             //Die Client_ids der anderen Clients
                     buffer_write(other.send_buffer, buffer_string, name);               //Die namen der anderen Clients
+                    buffer_write(other.send_buffer, buffer_string, sprite_index);       //Die sprites der anderen Clients
                     network_send_raw(socket_id,                                         //Die socket_ids werden vom Server Client genommen da er diese schon hat.
                                      other.send_buffer,                                 //Der send_buffer des aktuellen Clients wird gesendet. 
                                      buffer_tell(other.send_buffer));                   //Die länge des send_buffers.
