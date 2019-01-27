@@ -68,7 +68,9 @@ while(true){
             
             
             clientObject.name = username;                               //Den namen des Clients setzen
-            clientObject.sprite_index = yoursprite;                     //Den sprite des Clients setzen
+            if(yoursprite != ""){
+                clientObject.sprite_index = yoursprite;                     //Den sprite des Clients setzen
+            }
         break;
         case MESSAGE_LEAVE:
             var
@@ -112,15 +114,7 @@ client_id = argument0;
 if(ds_map_exists(clientmap, string(client_id))){        //Wenn der Client schon ein mal eine message vom anderen Client bekommen hat.
     return clientmap[? string(client_id)];              //Die map des Clients zurück geben
 }else{
-    if(!instance_exists(oOtherClient)){
-        var l = instance_create(0, 0, oOtherClient);        //Ein neues Object erzäugen für den anderen Client
-    } else if(!instance_exists(oOtherClient2)){
-        var l = instance_create(0, 0, oOtherClient2);        //Ein neues Object erzäugen für den anderen Client
-    } else if(!instance_exists(oOtherClient3)){
-        var l = instance_create(0, 0, oOtherClient3);        //Ein neues Object erzäugen für den anderen Client
-    } else if(!instance_exists(oOtherClient4)){
-        var l = instance_create(0, 0, oOtherClient4);        //Ein neues Object erzäugen für den anderen Client
-    }
+    var l = instance_create(0, 0, oOtherClient);        //Ein neues Object erzäugen für den anderen Client
     clientmap[? string(client_id)] = l;                 //Dem neuen Client eine map zuweisen
     return l;                                           //Den neuen Client zurückgeben
 }
