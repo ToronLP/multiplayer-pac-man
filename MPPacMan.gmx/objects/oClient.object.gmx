@@ -32,7 +32,6 @@ if(testvar == ZUSCHAUER_CODE){
     zuschauer=true;
 }
 var
-sprite = sGhost2;
 </string>
           </argument>
         </arguments>

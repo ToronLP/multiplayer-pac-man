@@ -40,7 +40,6 @@ while(true){
             client = buffer_read(buffer, buffer_u16);                   //Den Client aus dem buffer holen
             xx = buffer_read(buffer, buffer_u16);                       //Die x position des Clients holen
             yy = buffer_read(buffer, buffer_u16);                       //Die y position des Clients holen
-            //actsprite = buffer_read(buffer, buffer_string);             //Den Sprite aus dem buffer holen
             clientObject = client_get_object(client);                   //Script zur bestimmung welcher client gemeint ist
             
             clientObject.tim = 0;                                       //
@@ -48,8 +47,6 @@ while(true){
             clientObject.pry = clientObject.y;                          //
             clientObject.tox = xx;                                      //Setzen der x position des bewegten clients
             clientObject.toy = yy;                                      //Setzen der y position des bewegten clients
-            //clientObject.sprite = actsprite;                            //Den sprite des Clients setzen
-            //clientObject.sprite = actsprite;
             
             with(oServerClient){
                 if(client_id != client_is_current){
@@ -63,14 +60,9 @@ while(true){
             var
             client = buffer_read(buffer, buffer_u16);                   //Den Client aus dem buffer holen
             username = buffer_read(buffer, buffer_string);              //Den username aus dem buffer holen
-            yoursprite = buffer_read(buffer, buffer_string);            //Den sprite aus dem buffer hoeln
             clientObject = client_get_object(client);                   //Script zur bestimmung welcher client gemeint ist
             
-            
             clientObject.name = username;                               //Den namen des Clients setzen
-            if(yoursprite != ""){
-                clientObject.sprite_index = yoursprite;                     //Den sprite des Clients setzen
-            }
         break;
         case MESSAGE_LEAVE:
             var
@@ -115,6 +107,23 @@ if(ds_map_exists(clientmap, string(client_id))){        //Wenn der Client schon 
     return clientmap[? string(client_id)];              //Die map des Clients zurück geben
 }else{
     var l = instance_create(0, 0, oOtherClient);        //Ein neues Object erzäugen für den anderen Client
+    switch(client_id){
+        case 0:
+            l.sprite_index = sPac;
+        break;
+        case 1:
+            l.sprite_index = sGhost1;
+        break;
+        case 2:
+            l.sprite_index = sGhost2;
+        break;
+        case 3:
+            l.sprite_index = sGhost3;
+        break;
+        case 4:
+            l.sprite_index = sGhost4;
+        break;
+    }
     clientmap[? string(client_id)] = l;                 //Dem neuen Client eine map zuweisen
     return l;                                           //Den neuen Client zurückgeben
 }
