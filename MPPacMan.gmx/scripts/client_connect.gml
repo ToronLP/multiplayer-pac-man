@@ -16,7 +16,6 @@ clientmap = ds_map_create();                                //Eine Clientmap zum
 if(connect < 0){
     show_error("Could not connect to Server!", true);
 }
-
 buffer_seek(send_buffer, buffer_seek_start, 0);             //Das Schreiben wird am anfang des buffers geschehen.
 buffer_write(send_buffer, buffer_u8, MESSAGE_JOIN);         //Der Buffer bekommt den status JOIN damit Server und Client wissen was sie machen müssen.
 buffer_write(send_buffer, buffer_string, name);             //Der Buffer bekommt den name des neuen Clients

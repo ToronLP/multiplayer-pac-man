@@ -37,14 +37,14 @@ l.socket_id = socket_id;                        //Dien socket_id wird dem neuen 
 if(array_length_1d(client_id_counter)){                 
     client_id_counter = 0;                      //Zurücksetzen des ints
 }*/
-var i = 0;
-for(i = 0; i < array_length_1d(client_id_counter); i++){
+for(i = 0; i < array_length_1d(client_id_counter); i+=1){
     if(client_id_counter[i]==0){
         l.client_id = i;
         client_id_counter[i]=1;
         break;
     }
 }
+
 clientmap[? string(socket_id)] = l;             //erstellen einer Client Map um alle client Objecte zu speichern
 actual_connected_clients++;                     //Bei einem Connect wird die Variable für schön hoch gezählt.
 
