@@ -31,6 +31,7 @@ prx = x;
 pry = y;
 tox = x;
 toy = y;
+client_id = 0;
 </string>
           </argument>
         </arguments>
@@ -54,14 +55,11 @@ toy = y;
           <argument>
             <kind>1</kind>
             <string>///Sprite animieren
-/*if(sprite == sClient){
-    if(image_index&lt;=8){
-        image_speed = 1;
-        sprite_assign(image_index,sprite);
-    }else if(image_index&gt;=8){
-        image_index = 1;
-    }
-}*/
+if(image_index&lt;=8){
+    image_speed = 1;
+}else if(image_index&gt;=8){
+    image_index = 1;
+}
 </string>
           </argument>
         </arguments>

@@ -28,6 +28,7 @@
             <string>//LUL
 zuschauer = true;
 //oOtherClient.name = "Zuschauer";
+client_id = 0;
 </string>
           </argument>
         </arguments>

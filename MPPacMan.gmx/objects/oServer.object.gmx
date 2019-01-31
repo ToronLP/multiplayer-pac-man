@@ -96,8 +96,20 @@ draw_set_colour(c_white);
 draw_set_halign(fa_center);
 draw_set_valign(fa_center);
 draw_text(x, y, "Die Server IP: "+string(SERVER_IP));
-draw_text(x, y+15, "Die Anzahl der Clients: "+string(client_id_counter));
-draw_text(x, y+30, "Die Anzahl der Aktuellen Clients: "+string(actual_connected_clients)+"/"+string(MAX_ANZ_CLIENTS));
+for(i = 1; i &lt; array_length_1d(client_id_counter); i++){
+    /*if(string(client_id_counter[i-1])==1){
+        draw_text(x, y+(15*i), "Client " + string(i) + " Verbunden");
+    } else {
+        draw_text(x, y+(15*i), "Client " + string(i) + " nicht verbunden");
+    }*/
+    draw_text(x, y+(15*i), "Client " + string(i) + " Verbunden : " + string(client_id_counter[i-1]));
+}
+/*if(string(client_id_counter[5])==1){
+    draw_text(x, y+90, "Zuschauer Verbunden");
+} else {
+    draw_text(x, y+90, "Zuschauer nicht Verbunden");
+}*/
+draw_text(x, y+105, "Die Anzahl der Aktuellen Clients: "+string(actual_connected_clients)+"/"+string(MAX_ANZ_CLIENTS));
 </string>
           </argument>
         </arguments>

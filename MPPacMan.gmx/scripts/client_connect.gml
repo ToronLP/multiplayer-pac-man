@@ -23,6 +23,8 @@ network_send_raw(socket,                                    //Die neue Soket wir
                  send_buffer,                               //Der send_buffer wird gesendet
                  buffer_tell(send_buffer));                 //Die länge des send_buffer wird ermittelt
 
+my_client_id = -1;
+
 #define client_handle_message
 ///client_handle_message(buffer)
 
@@ -34,6 +36,10 @@ while(true){
     message_id = buffer_read(buffer, buffer_u8);                        //Es wird geladen was Passiert ist ob sich ein Client verbunden hat oder ob ein Client sich bewegt hat
     
     switch(message_id){
+        case MESSAGE_GETID:
+            my_client_id = buffer_read(buffer, buffer_u16);
+            oPlayer.client_id = my_client_id;
+        break;
         case MESSAGE_MOVE:
             var                                                         //Der Buffer der gesendet wurde muss in der gleichen Reihenfolge ausgelesen werden wie er geschrieben wurde.
             client = buffer_read(buffer, buffer_u16);                   //Den Client aus dem buffer holen
@@ -62,6 +68,7 @@ while(true){
             clientObject = client_get_object(client);                   //Script zur bestimmung welcher client gemeint ist
             
             clientObject.name = username;                               //Den namen des Clients setzen
+            clientObject.client_id = client;
         break;
         case MESSAGE_LEAVE:
             var
@@ -101,11 +108,18 @@ network_send_raw(socket, send_buffer, buffer_tell(send_buffer));    //Das eigene
 
 var
 client_id = argument0;
-
+if(client_id == my_client_id){
+    if(!instance_exists(oPlayer)){
+        instance_create(0, 0, oPlayer);
+    }
+    //oPlayer.client_id = my_client_id;
+    return oPlayer.id;
+}
 if(ds_map_exists(clientmap, string(client_id))){        //Wenn der Client schon ein mal eine message vom anderen Client bekommen hat.
     return clientmap[? string(client_id)];              //Die map des Clients zurück geben
 }else{
     var l = instance_create(0, 0, oOtherClient);        //Ein neues Object erzäugen für den anderen Client
+    l.client_id = client_id;
     switch(client_id){
         case 0:
             l.sprite_index = sPac;

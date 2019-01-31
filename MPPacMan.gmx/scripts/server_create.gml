@@ -28,7 +28,9 @@ return server;                                              //Server zurück geb
 var
 socket_id = argument0;                          //Variable wird gesetzt biem aufrufen des Scripts
 
+var
 l = instance_create(0, 0, oServerClient);       //Erstellen eines ServerClient object
+
 l.socket_id = socket_id;                        //Dien socket_id wird dem neuen ServerClient object zugewiesen
 //l.client_id = client_id_counter++;              //Die Client_id wird benutzt um den client idenfizieren zu können da die Socket_id random ist.
 /**/
@@ -47,6 +49,11 @@ for(i = 0; i < array_length_1d(client_id_counter); i+=1){
 
 clientmap[? string(socket_id)] = l;             //erstellen einer Client Map um alle client Objecte zu speichern
 actual_connected_clients++;                     //Bei einem Connect wird die Variable für schön hoch gezählt.
+
+buffer_seek(send_buffer, buffer_seek_start, 0);
+buffer_write(send_buffer, buffer_u8, MESSAGE_GETID);
+buffer_write(send_buffer, buffer_u16, l.client_id);
+network_send_raw(socket_id, send_buffer, buffer_tell(send_buffer));
 
 #define server_handle_message
  ///server_handle_message(socket_id, buffer);

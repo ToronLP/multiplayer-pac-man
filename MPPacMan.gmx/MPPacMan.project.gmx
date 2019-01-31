@@ -30,9 +30,6 @@
       <object>objects\oClient</object>
       <object>objects\oPlayer</object>
       <object>objects\oOtherClient</object>
-      <object>objects\oOtherClient2</object>
-      <object>objects\oOtherClient3</object>
-      <object>objects\oOtherClient4</object>
       <object>objects\oZuschauer</object>
     </objects>
     <objects name="util">

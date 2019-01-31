@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>zuschauer = false;
+client_id = 0;
 </string>
           </argument>
         </arguments>
@@ -92,6 +93,23 @@ if(keyboard_check(vk_down)||keyboard_check(ord("S"))){
           <argument>
             <kind>1</kind>
             <string>draw_self();
+switch(client_id){
+    case 0:
+        sprite_index = sPac;
+    break;
+    case 1:
+        sprite_index = sGhost1;
+    break;
+    case 2:
+        sprite_index = sGhost2;
+    break;
+    case 3:
+        sprite_index = sGhost3;
+    break;
+    case 4:
+        sprite_index = sGhost4;
+    break;
+}
 </string>
           </argument>
         </arguments>
