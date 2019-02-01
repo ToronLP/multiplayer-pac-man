@@ -32,6 +32,7 @@ pry = y;
 tox = x;
 toy = y;
 client_id = 0;
+direcktion_state = "right";
 </string>
           </argument>
         </arguments>
@@ -55,10 +56,32 @@ client_id = 0;
           <argument>
             <kind>1</kind>
             <string>///Sprite animieren
-if(image_index&lt;=8){
-    image_speed = 1;
-}else if(image_index&gt;=8){
-    image_index = 1;
+var
+previousx = 0;
+previousy = 0;
+
+if(previousx &gt; x){
+    direcktion_state = "right";
+    previousx = x;
+}else if(previousx &lt; x){
+    direction_state = "left";
+    previousx = x;
+}else if(previousy &gt; y){
+    direction_state = "down";
+    previousy = y;
+}else if(previousy &lt; y){
+    direction_state = "up";
+    previousy = y;
+}
+
+if(direcktion_state == "right"){
+    sprite_index = sPacRight;
+}else if(direcktion_state == "left"){
+    sprite_index = sPacLeft;
+}else if(direcktion_state == "down"){
+    sprite_index = sPacDown;
+}else if(direcktion_state == "up"){
+    sprite_index = sPacUp;
 }
 </string>
           </argument>

@@ -9,11 +9,18 @@
     <sprite>sprites\sPlayer</sprite>
     <sprite>sprites\sClient</sprite>
     <sprite>sprites\sButton</sprite>
-    <sprite>sprites\sPac</sprite>
-    <sprite>sprites\sGhost1</sprite>
-    <sprite>sprites\sGhost2</sprite>
-    <sprite>sprites\sGhost3</sprite>
-    <sprite>sprites\sGhost4</sprite>
+    <sprites name="Pac">
+      <sprite>sprites\sPacRight</sprite>
+      <sprite>sprites\sPacLeft</sprite>
+      <sprite>sprites\sPacDown</sprite>
+      <sprite>sprites\sPacUp</sprite>
+    </sprites>
+    <sprites name="Ghosts">
+      <sprite>sprites\sGhost1</sprite>
+      <sprite>sprites\sGhost2</sprite>
+      <sprite>sprites\sGhost3</sprite>
+      <sprite>sprites\sGhost4</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>

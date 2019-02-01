@@ -122,7 +122,7 @@ if(ds_map_exists(clientmap, string(client_id))){        //Wenn der Client schon 
     l.client_id = client_id;
     switch(client_id){
         case 0:
-            l.sprite_index = sPac;
+            l.sprite_index = sPacRight;
         break;
         case 1:
             l.sprite_index = sGhost1;
