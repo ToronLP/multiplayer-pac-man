@@ -56,32 +56,26 @@ direcktion_state = "right";
           <argument>
             <kind>1</kind>
             <string>///Sprite animieren
-var
-previousx = 0;
-previousy = 0;
-
-if(previousx &gt; x){
-    direcktion_state = "right";
-    previousx = x;
-}else if(previousx &lt; x){
-    direction_state = "left";
-    previousx = x;
-}else if(previousy &gt; y){
-    direction_state = "down";
-    previousy = y;
-}else if(previousy &lt; y){
-    direction_state = "up";
-    previousy = y;
-}
-
-if(direcktion_state == "right"){
-    sprite_index = sPacRight;
-}else if(direcktion_state == "left"){
-    sprite_index = sPacLeft;
-}else if(direcktion_state == "down"){
-    sprite_index = sPacDown;
-}else if(direcktion_state == "up"){
-    sprite_index = sPacUp;
+if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacDown||sprite_index == sPacUp){
+    if(prx &gt; tox){
+        direcktion_state = "right";
+    }else if(prx &lt; tox){
+        direction_state = "left";
+    }else if(pry &gt; toy){
+        direction_state = "down";
+    }else if(pry &lt; toy){
+        direction_state = "up";
+    }
+    
+    if(direcktion_state == "right"){
+        sprite_index = sPacRight;
+    }else if(direcktion_state == "left"){
+        sprite_index = sPacLeft;
+    }else if(direcktion_state == "down"){
+        sprite_index = sPacDown;
+    }else if(direcktion_state == "up"){
+        sprite_index = sPacUp;
+    }
 }
 </string>
           </argument>

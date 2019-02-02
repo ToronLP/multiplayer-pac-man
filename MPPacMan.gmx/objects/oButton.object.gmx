@@ -88,8 +88,8 @@
             <string>draw_self();
 //Wenn der Mauszeiger im Viereck ist sollen ein Pac links und ein Pac rechtgs gemalt werden.
 if(point_in_rectangle(mouse_x, mouse_y, x-96, y-32, x+96, y+32)){
-    draw_sprite(sPacRight, 0, x-120, y);
-    draw_sprite(sPacRight, 1, x+120, y);
+    draw_sprite(sPacRight, 0, x-138, y);
+    draw_sprite(sPacLeft, 0, x+138, y);
 }
 draw_set_colour(c_white);               //Die Textfarbe ist weis
 draw_set_halign(fa_center);             //Der Text wird horizontal in der mitte des Knopfes gemalt

@@ -21,6 +21,7 @@
       <sprite>sprites\sGhost3</sprite>
       <sprite>sprites\sGhost4</sprite>
     </sprites>
+    <sprite>sprites\sWall</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -42,6 +43,7 @@
     <objects name="util">
       <object>objects\oButton</object>
     </objects>
+    <object>objects\oWall</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmOne</room>
