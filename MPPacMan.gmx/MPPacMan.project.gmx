@@ -22,20 +22,28 @@
       <sprite>sprites\sGhost4</sprite>
     </sprites>
     <sprites name="Walls">
-      <sprite>sprites\sWallCornerTopRight</sprite>
-      <sprite>sprites\sWallCornerTopLeft</sprite>
-      <sprite>sprites\sWallCornerBottomRight</sprite>
-      <sprite>sprites\sWallCornerBottomLeft</sprite>
-      <sprite>sprites\sWallEdgeLeft</sprite>
-      <sprite>sprites\sWallEdgeTop</sprite>
-      <sprite>sprites\sWallEdgeRight</sprite>
-      <sprite>sprites\sWallEdgeBottom</sprite>
-      <sprite>sprites\sWallStraightTopBottom</sprite>
-      <sprite>sprites\sWallStraightLeftRight</sprite>
-      <sprite>sprites\sWallTTop</sprite>
-      <sprite>sprites\sWallTRight</sprite>
-      <sprite>sprites\sWallTBottom</sprite>
-      <sprite>sprites\sWallTLeft</sprite>
+      <sprites name="Corners">
+        <sprite>sprites\sWallCornerTopRight</sprite>
+        <sprite>sprites\sWallCornerTopLeft</sprite>
+        <sprite>sprites\sWallCornerBottomRight</sprite>
+        <sprite>sprites\sWallCornerBottomLeft</sprite>
+      </sprites>
+      <sprites name="Edges">
+        <sprite>sprites\sWallEdgeLeft</sprite>
+        <sprite>sprites\sWallEdgeTop</sprite>
+        <sprite>sprites\sWallEdgeRight</sprite>
+        <sprite>sprites\sWallEdgeBottom</sprite>
+      </sprites>
+      <sprites name="Straights">
+        <sprite>sprites\sWallStraightTopBottom</sprite>
+        <sprite>sprites\sWallStraightLeftRight</sprite>
+      </sprites>
+      <sprites name="T-Kräutzung">
+        <sprite>sprites\sWallTTop</sprite>
+        <sprite>sprites\sWallTRight</sprite>
+        <sprite>sprites\sWallTBottom</sprite>
+        <sprite>sprites\sWallTLeft</sprite>
+      </sprites>
       <sprite>sprites\sWallCross</sprite>
       <sprite>sprites\sWallDot</sprite>
     </sprites>
@@ -62,12 +70,30 @@
     </objects>
     <objects name="Walls">
       <object>objects\oWallParrent</object>
-      <object>objects\oWallCornerTopRight</object>
-      <object>objects\oWallCornerTopLeft</object>
-      <object>objects\oWallCornerBottomRight</object>
-      <object>objects\oWallCornerBottomLeft</object>
-      <object>objects\oWallStraightTopBottom</object>
-      <object>objects\oWalllStraightLeftRight</object>
+      <objects name="Corners">
+        <object>objects\oWallCornerTopRight</object>
+        <object>objects\oWallCornerTopLeft</object>
+        <object>objects\oWallCornerBottomRight</object>
+        <object>objects\oWallCornerBottomLeft</object>
+      </objects>
+      <objects name="Edges">
+        <object>objects\oWallEdgeLeft</object>
+        <object>objects\oWallEdgeTop</object>
+        <object>objects\oWallEdgeRight</object>
+        <object>objects\oWallEdgeBottom</object>
+      </objects>
+      <objects name="Straights">
+        <object>objects\oWallStraightTopBottom</object>
+        <object>objects\oWalllStraightLeftRight</object>
+      </objects>
+      <objects name="T-Kräutzung">
+        <object>objects\oWallTTop</object>
+        <object>objects\oWallTRight</object>
+        <object>objects\oWallTBottom</object>
+        <object>objects\oWallTLeft</object>
+      </objects>
+      <object>objects\oWallCross</object>
+      <object>objects\oWallDot</object>
     </objects>
   </objects>
   <rooms name="rooms">

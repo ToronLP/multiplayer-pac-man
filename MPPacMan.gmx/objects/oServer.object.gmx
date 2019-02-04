@@ -104,6 +104,7 @@ for(i = 1; i &lt; array_length_1d(client_id_counter); i++){
     }*/
     draw_text(x, y+(15*i), "Client " + string(i) + " Verbunden : " + string(client_id_counter[i-1]));
 }
+draw_text(x, y+(15*6), "Zuschauer Verbunden : " + string(client_id_counter[5]));
 /*if(string(client_id_counter[5])==1){
     draw_text(x, y+90, "Zuschauer Verbunden");
 } else {

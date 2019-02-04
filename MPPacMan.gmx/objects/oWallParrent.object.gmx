@@ -73,10 +73,7 @@ Viereck ohne Offene Seiten = 14;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//if(!instance_exists(oButton)){
-    image_speed = 0;
-    //draw_self();
-//}
+            <string>image_speed = 0;
 </string>
           </argument>
         </arguments>

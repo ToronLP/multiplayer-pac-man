@@ -60,7 +60,7 @@
 } else if(txt == "Zuschauen"){                      //Wenn der text im Button Zuschauen ist
     //with(oButton) instance_destroy();               //Alle Knöpfe zerstören
     room_goto(rmLevel);
-    instance_create(0,0, oClient);                  //Ein Client Objekt erzäugen
+    //instance_create(0,0, oClient);                  //Ein Client Objekt erzäugen
     instance_create(-100,-100, oZuschauer);         //Einen Zuschauer erzäugen
 }
 </string>
