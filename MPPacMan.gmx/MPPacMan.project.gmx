@@ -21,7 +21,24 @@
       <sprite>sprites\sGhost3</sprite>
       <sprite>sprites\sGhost4</sprite>
     </sprites>
-    <sprite>sprites\sWall</sprite>
+    <sprites name="Walls">
+      <sprite>sprites\sWallCornerTopRight</sprite>
+      <sprite>sprites\sWallCornerTopLeft</sprite>
+      <sprite>sprites\sWallCornerBottomRight</sprite>
+      <sprite>sprites\sWallCornerBottomLeft</sprite>
+      <sprite>sprites\sWallEdgeLeft</sprite>
+      <sprite>sprites\sWallEdgeTop</sprite>
+      <sprite>sprites\sWallEdgeRight</sprite>
+      <sprite>sprites\sWallEdgeBottom</sprite>
+      <sprite>sprites\sWallStraightTopBottom</sprite>
+      <sprite>sprites\sWallStraightLeftRight</sprite>
+      <sprite>sprites\sWallTTop</sprite>
+      <sprite>sprites\sWallTRight</sprite>
+      <sprite>sprites\sWallTBottom</sprite>
+      <sprite>sprites\sWallTLeft</sprite>
+      <sprite>sprites\sWallCross</sprite>
+      <sprite>sprites\sWallDot</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -43,10 +60,20 @@
     <objects name="util">
       <object>objects\oButton</object>
     </objects>
-    <object>objects\oWall</object>
+    <objects name="Walls">
+      <object>objects\oWallParrent</object>
+      <object>objects\oWallCornerTopRight</object>
+      <object>objects\oWallCornerTopLeft</object>
+      <object>objects\oWallCornerBottomRight</object>
+      <object>objects\oWallCornerBottomLeft</object>
+      <object>objects\oWallStraightTopBottom</object>
+      <object>objects\oWalllStraightLeftRight</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmOne</room>
+    <room>rooms\rmLevel</room>
+    <room>rooms\rmServer</room>
   </rooms>
   <constants number="9">
     <constant name="SERVER_IP">"127.0.0.1"</constant>

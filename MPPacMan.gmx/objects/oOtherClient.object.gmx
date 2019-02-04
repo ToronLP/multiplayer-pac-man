@@ -76,6 +76,10 @@ if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacDown
     }else if(direcktion_state == "up"){
         sprite_index = sPacUp;
     }
+} else if(sprite_index = sGhost1||sprite_index = sGhost2||sprite_index = sGhost3||sprite_index = sGhost4){
+    if(sprite_index &gt; 8){
+        sprite_index = 0;
+    }
 }
 </string>
           </argument>
