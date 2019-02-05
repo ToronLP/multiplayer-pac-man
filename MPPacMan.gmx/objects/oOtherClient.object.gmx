@@ -3,7 +3,7 @@
   <spriteName>sGhost1</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-10</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -55,32 +55,10 @@ direcktion_state = "right";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Sprite animieren
-if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacDown||sprite_index == sPacUp){
-    if(prx &gt; tox){
-        direcktion_state = "right";
-    }else if(prx &lt; tox){
-        direction_state = "left";
-    }else if(pry &gt; toy){
-        direction_state = "down";
-    }else if(pry &lt; toy){
-        direction_state = "up";
-    }
-    
-    if(direcktion_state == "right"){
-        sprite_index = sPacRight;
-    }else if(direcktion_state == "left"){
-        sprite_index = sPacLeft;
-    }else if(direcktion_state == "down"){
-        sprite_index = sPacDown;
-    }else if(direcktion_state == "up"){
-        sprite_index = sPacUp;
-    }
-} else if(sprite_index = sGhost1||sprite_index = sGhost2||sprite_index = sGhost3||sprite_index = sGhost4){
-    if(image_index &gt; 8){
-        image_index = 0;
-    }
-}
+            <string>///Bewegung schätzen
+x = lerp(prx, tox, 1/UPDATE_SPEED * tim);
+y = lerp(pry, toy, 1/UPDATE_SPEED * tim);
+tim++;
 </string>
           </argument>
         </arguments>
@@ -101,10 +79,32 @@ if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacDown
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Bewegung schätzen
-x = lerp(prx, tox, 1/UPDATE_SPEED * tim);
-y = lerp(pry, toy, 1/UPDATE_SPEED * tim);
-tim++;
+            <string>///Sprite animieren
+if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacDown||sprite_index == sPacUp){
+    if(prx &gt;= tox){
+        direcktion_state = "right";
+    }else if(prx &lt;= tox){
+        direction_state = "left";
+    }else if(pry &gt;= toy){
+        direction_state = "down";
+    }else if(pry &lt;= toy){
+        direction_state = "up";
+    }
+    
+    if(direcktion_state == "right"){
+        sprite_index = sPacRight;
+    }else if(direcktion_state == "left"){
+        sprite_index = sPacLeft;
+    }else if(direcktion_state == "down"){
+        sprite_index = sPacDown;
+    }else if(direcktion_state == "up"){
+        sprite_index = sPacUp;
+    }
+} else if(sprite_index = sGhost1||sprite_index = sGhost2||sprite_index = sGhost3||sprite_index = sGhost4){
+    if(image_index &gt; 8){
+        image_index = 0;
+    }
+}
 </string>
           </argument>
         </arguments>

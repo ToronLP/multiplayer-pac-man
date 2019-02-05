@@ -3,7 +3,7 @@
   <spriteName>sPacRight</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-10</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -28,6 +28,12 @@
             <string>zuschauer = false;
 client_id = 0;
 direcktion_state = "right";
+grid_size = 64;
+move_speed = 4;
+hsp = 0;
+vspe = 0;
+is_moving = false;
+move_timer = grid_size;
 </string>
           </argument>
         </arguments>
@@ -50,47 +56,124 @@ direcktion_state = "right";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Ein einfaches bewegungs System
-var
-walk_speed;
-if(keyboard_check(vk_shift)){
-    walk_speed = 10;
-} else {
-    walk_speed = 5;
-}
-
-if(keyboard_check(vk_right)||keyboard_check(ord("D"))){
-    if(x+image_xscale/2&lt;room_width){
-        if(!place_meeting(x+walk_speed/2,y,oWallParrent)){
-            x += walk_speed;
-        }
-        direcktion_state = "right";
-    }
-}
-if(keyboard_check(vk_left)||keyboard_check(ord("A"))){
-    if(x-image_xscale/2&gt;0){
-        if(!place_meeting(x-walk_speed/2,y,oWallParrent)){
-            x -= walk_speed;
-        }
+            <string>/// Move the Player
+key_left = keyboard_check(vk_left)||keyboard_check(ord("A"));
+key_right = keyboard_check(vk_right)||keyboard_check(ord("D"));
+key_up = keyboard_check(vk_up)||keyboard_check(ord("W"));
+key_down = keyboard_check(vk_down)||keyboard_check(ord("S"));
+if(!is_moving){
+    if(key_left){
+        is_moving = true;
+        move_timer = grid_size;
+        hsp = -move_speed;
+        vsp = 0;
         direcktion_state = "left";
-    }
-}
-if(keyboard_check(vk_down)||keyboard_check(ord("S"))){
-    if(y+image_yscale/2&lt;room_height){
-        if(!place_meeting(x,y+walk_speed/2,oWallParrent)){
-            y += walk_speed;
-        }
+    } else if(key_right){
+        is_moving = true;
+        move_timer = grid_size;
+        hsp = move_speed;
+        vsp = 0;
+        direcktion_state = "right";
+    } else if(key_up){
+        is_moving = true;
+        move_timer = grid_size;
+        hsp = 0;
+        vsp = -move_speed;
+        direcktion_state = "up";
+    } else if(key_down){
+        is_moving = true;
+        move_timer = grid_size;
+        hsp = 0;
+        vsp = move_speed;
         direcktion_state = "down";
     }
 }
-if(keyboard_check(vk_up)||keyboard_check(ord("W"))){
-    if(y-image_yscale/2&gt;0){
-        if(!place_meeting(x,y-walk_speed/2,oWallParrent)){
-            y -= walk_speed;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Collision Detection and movement
+if(is_moving){
+    if(move_timer &gt; 0) {
+        if(place_meeting(x + hsp, y, oWallParrent)){
+            hsp = 0;
+            move_timer = 0;
         }
-        direcktion_state = "up";
+        x += hsp;
+        if(place_meeting(x,y + vsp, oWallParrent)){
+            vsp = 0;
+            move_timer = 0;
+        }
+        y += vsp;
+        move_timer -= move_speed;
+    } else {
+        is_moving = false;
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Check Collision with Collectables
+/*if(place_meeting(x,y,oCollectablesParrent)){
+    var coll = instance_nearest(x, y, oCollectablesParrent);
+    with(coll){
+        instance_destroy();
+    }
+}*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Animate the Pac
 if(client_id == 0){
     if(direcktion_state == "right"){
         sprite_index = sPacRight;
@@ -102,6 +185,27 @@ if(client_id == 0){
         sprite_index = sPacUp;
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Animate the Ghost
 if(sprite_index = sGhost1||sprite_index = sGhost2||sprite_index = sGhost3||sprite_index = sGhost4){
     if(image_index == 8){
         image_index = 0;
@@ -129,8 +233,7 @@ if(sprite_index = sGhost1||sprite_index = sGhost2||sprite_index = sGhost3||sprit
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
-switch(client_id){
+            <string>switch(client_id){
     case 0:
         sprite_index = sPacRight;
     break;
