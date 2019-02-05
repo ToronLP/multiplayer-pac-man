@@ -29,8 +29,8 @@
 zuschauer = true;
 //oOtherClient.name = "Zuschauer";
 client_id = 0;
-oPlayer.x=-100;
-oPlayer.y=-100;
+//oPlayer.x=-100;
+//oPlayer.y=-100;
 </string>
           </argument>
         </arguments>

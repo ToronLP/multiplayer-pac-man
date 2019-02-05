@@ -55,7 +55,7 @@
 } else if(txt == "join server"){                    //Wenn der text im Button Join Server ist
     //with(oButton) instance_destroy();               //Alle Knöpfe zerstören
     room_goto(rmLevel);
-    //instance_create(0,0, oClient);                  //Ein Client Objekt erzäugen
+    instance_create(0,0, oClient);                  //Ein Client Objekt erzäugen
     instance_create(480,224, oPlayer);              //Einen Player erzäugen
 } else if(txt == "Zuschauen"){                      //Wenn der text im Button Zuschauen ist
     //with(oButton) instance_destroy();               //Alle Knöpfe zerstören
