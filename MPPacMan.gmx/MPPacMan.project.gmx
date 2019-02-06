@@ -48,6 +48,7 @@
       <sprite>sprites\sWallDot</sprite>
     </sprites>
     <sprite>sprites\sCoin</sprite>
+    <sprite>sprites\sHeart</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -106,6 +107,7 @@
     <room>rooms\rmOne</room>
     <room>rooms\rmLevel</room>
     <room>rooms\rmServer</room>
+    <room>rooms\rmGameOver</room>
   </rooms>
   <constants number="9">
     <constant name="SERVER_IP">"127.0.0.1"</constant>
