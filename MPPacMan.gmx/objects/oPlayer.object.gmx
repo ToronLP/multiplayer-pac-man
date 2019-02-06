@@ -34,6 +34,8 @@ hsp = 0;
 vspe = 0;
 is_moving = false;
 move_timer = grid_size;
+
+points = 0;
 </string>
           </argument>
         </arguments>
@@ -147,12 +149,15 @@ if(is_moving){
           <argument>
             <kind>1</kind>
             <string>/// Check Collision with Collectables
-/*if(place_meeting(x,y,oCollectablesParrent)){
+if(place_meeting(x,y,oCollectablesParrent)){
     var coll = instance_nearest(x, y, oCollectablesParrent);
+    
+    points += coll.points;
+    
     with(coll){
         instance_destroy();
     }
-}*/
+}
 </string>
           </argument>
         </arguments>
@@ -233,7 +238,7 @@ if(sprite_index == sGhost1||sprite_index == sGhost2||sprite_index == sGhost3||sp
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//draw_text(room_height/2,room_width/2, string(x)+ " " +string(y));
+            <string>draw_text(40,10, "Points: " + string(points));
 </string>
           </argument>
         </arguments>

@@ -47,11 +47,10 @@
       <sprite>sprites\sWallCross</sprite>
       <sprite>sprites\sWallDot</sprite>
     </sprites>
+    <sprite>sprites\sCoin</sprite>
   </sprites>
   <backgrounds name="background"/>
-  <paths name="paths">
-    <path>paths\path0</path>
-  </paths>
+  <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\server_create.gml</script>
     <script>scripts\client_connect.gml</script>
@@ -97,6 +96,10 @@
       </objects>
       <object>objects\oWallCross</object>
       <object>objects\oWallDot</object>
+    </objects>
+    <objects name="Collectables">
+      <object>objects\oCollectablesParrent</object>
+      <object>objects\oCoin</object>
     </objects>
   </objects>
   <rooms name="rooms">
