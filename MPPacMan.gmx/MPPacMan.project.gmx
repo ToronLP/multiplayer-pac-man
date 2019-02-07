@@ -66,6 +66,7 @@
       <object>objects\oPlayer</object>
       <object>objects\oOtherClient</object>
       <object>objects\oZuschauer</object>
+      <object>objects\oBotHandler</object>
       <object>objects\oBot</object>
     </objects>
     <objects name="util">

@@ -60,6 +60,32 @@ points = 0;
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Change to Ghost Stats
+if(!client_id==0){
+    move_speed = 8;
+    x = 480;
+    y = 224;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>/// Move the Player
 key_left = keyboard_check(vk_left)||keyboard_check(ord("A"));
 key_right = keyboard_check(vk_right)||keyboard_check(ord("D"));
@@ -274,24 +300,26 @@ if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacUp||
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(50,10, "Points: " + string(points));
+            <string>draw_set_halign(fa_left);             //Der Text wird horizontal in der mitte des Knopfes gemalt
+draw_set_valign(fa_top);
+draw_text(10,10, "Points: " + string(points));
 
-if(hp &gt;= 1&amp;&amp;sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacUp||sprite_index == sPacDown){
+if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacUp||sprite_index == sPacDown){
     switch(hp){
         case 3:
-            draw_sprite(sHeart,0,30,52);
-            draw_sprite(sHeart,0,30+32+10,52);
-            draw_sprite(sHeart,0,30+32+32+10+10,52);
+            draw_sprite(sHeart,0,26,52);
+            draw_sprite(sHeart,0,68,52);
+            draw_sprite(sHeart,0,110,52);
         break;
         case 2:
-            draw_sprite(sHeart,0,30,52);
-            draw_sprite(sHeart,0,30+32+10,52);
-            draw_sprite(sHeart,1,30+32+32+10+10,52);
+            draw_sprite(sHeart,0,26,52);
+            draw_sprite(sHeart,0,68,52);
+            draw_sprite(sHeart,1,110,52);
         break;
         case 1:
-            draw_sprite(sHeart,0,30,52);
-            draw_sprite(sHeart,1,30+32+10,52);
-            draw_sprite(sHeart,1,30+32+32+10+10,52);
+            draw_sprite(sHeart,0,26,52);
+            draw_sprite(sHeart,1,68,52);
+            draw_sprite(sHeart,1,110,52);
         break;
     }
 }

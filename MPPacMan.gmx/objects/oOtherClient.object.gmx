@@ -32,7 +32,8 @@ pry = y;
 tox = x;
 toy = y;
 client_id = 0;
-direcktion_state = "right";
+dirx = 0;
+diry = 0;
 </string>
           </argument>
         </arguments>
@@ -80,25 +81,32 @@ tim++;
           <argument>
             <kind>1</kind>
             <string>///Sprite animieren
+if(prx-tox &lt; 0){
+    dirx = 0;
+}else if(prx-tox &gt; 0){
+    dirx = 1;
+}
+if(pry-toy &gt; 0){
+    diry = 0;
+} else if(pry-toy &lt; 0){
+    diry = 1;
+}
 if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacDown||sprite_index == sPacUp){
-    if(prx &gt;= tox){
-        direcktion_state = "right";
-    }else if(prx &lt;= tox){
-        direction_state = "left";
-    }else if(pry &gt;= toy){
-        direction_state = "down";
-    }else if(pry &lt;= toy){
-        direction_state = "up";
+    switch(dirx){
+        case 0:
+            sprite_index = sPacRight;
+        break;
+        case 1:
+            sprite_index = sPacLeft;
+        break;
     }
-    
-    if(direcktion_state == "right"){
-        sprite_index = sPacRight;
-    }else if(direcktion_state == "left"){
-        sprite_index = sPacLeft;
-    }else if(direcktion_state == "down"){
-        sprite_index = sPacDown;
-    }else if(direcktion_state == "up"){
-        sprite_index = sPacUp;
+    switch(diry){
+        case 0:
+            sprite_index = sPacUp;
+        break;
+        case 1:
+            sprite_index = sPacDown;
+        break;
     }
 } else if(sprite_index = sGhost1||sprite_index = sGhost2||sprite_index = sGhost3||sprite_index = sGhost4){
     if(image_index &gt; 8){
