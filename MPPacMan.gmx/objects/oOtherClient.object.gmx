@@ -25,15 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>name = "";
+            <string>///Variablen initialisieren
+name = "";
+//Für die Bewegung benötigt
 tim = 0;
 prx = x;
 pry = y;
 tox = x;
 toy = y;
+//Client id zum Sprite Wechseln
 client_id = 0;
-dirx = 0;
-diry = 0;
+//Richtung des Pacs
+direcktion_state = "left";
 </string>
           </argument>
         </arguments>
@@ -81,38 +84,44 @@ tim++;
           <argument>
             <kind>1</kind>
             <string>///Sprite animieren
-if(prx-tox &lt; 0){
-    dirx = 0;
-}else if(prx-tox &gt; 0){
-    dirx = 1;
-}
-if(pry-toy &gt; 0){
-    diry = 0;
-} else if(pry-toy &lt; 0){
-    diry = 1;
-}
 if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacDown||sprite_index == sPacUp){
-    switch(dirx){
-        case 0:
-            sprite_index = sPacRight;
-        break;
-        case 1:
-            sprite_index = sPacLeft;
-        break;
+    if(direcktion_state == "right"){
+        sprite_index = sPacRight;
+    }else if(direcktion_state == "left"){
+        sprite_index = sPacLeft;
+    }else if(direcktion_state == "down"){
+        sprite_index = sPacDown;
+    }else if(direcktion_state == "up"){
+        sprite_index = sPacUp;
     }
-    switch(diry){
-        case 0:
-            sprite_index = sPacUp;
-        break;
-        case 1:
-            sprite_index = sPacDown;
-        break;
-    }
-} else if(sprite_index = sGhost1||sprite_index = sGhost2||sprite_index = sGhost3||sprite_index = sGhost4){
+} else {
     if(image_index &gt; 8){
         image_index = 0;
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_text(10,104, direcktion_state);
 </string>
           </argument>
         </arguments>

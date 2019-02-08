@@ -29,12 +29,11 @@
 client_id = 0;
 direcktion_state = "right";
 grid_size = 64;
-move_speed = 4;
 hsp = 0;
 vspe = 0;
 is_moving = false;
 move_timer = grid_size;
-
+setStats = false;
 hp = 3;
 
 points = 0;
@@ -61,10 +60,12 @@ points = 0;
           <argument>
             <kind>1</kind>
             <string>///Change to Ghost Stats
-if(!client_id==0){
-    move_speed = 8;
+if(!client_id==0&amp;&amp;setStats==false){
     x = 480;
     y = 224;
+    setStats = true;
+}else{
+    move_speed = 4;
 }
 </string>
           </argument>
@@ -269,7 +270,7 @@ if(sprite_index == sGhost1||sprite_index == sGhost2||sprite_index == sGhost3||sp
             <string>/// Check Collision with Ghosts
 if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacUp||sprite_index == sPacDown){
     if(place_meeting(x,y,oOtherClient)){
-        if(hp&gt;=1){
+        if(hp&gt;1){
             hp-=1;
             x = 608;
             y = 736;
@@ -303,6 +304,7 @@ if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacUp||
             <string>draw_set_halign(fa_left);             //Der Text wird horizontal in der mitte des Knopfes gemalt
 draw_set_valign(fa_top);
 draw_text(10,10, "Points: " + string(points));
+draw_text(10,94, direcktion_state);
 
 if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacUp||sprite_index == sPacDown){
     switch(hp){

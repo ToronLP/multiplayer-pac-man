@@ -49,6 +49,7 @@
     </sprites>
     <sprite>sprites\sCoin</sprite>
     <sprite>sprites\sHeart</sprite>
+    <sprite>sprites\sCherry</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -102,6 +103,7 @@
     <objects name="Collectables">
       <object>objects\oCollectablesParrent</object>
       <object>objects\oCoin</object>
+      <object>objects\oCherry</object>
     </objects>
   </objects>
   <rooms name="rooms">
