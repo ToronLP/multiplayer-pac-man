@@ -35,7 +35,7 @@ is_moving = false;
 move_timer = grid_size;
 setStats = false;
 hp = 3;
-
+game_over = false;
 points = 0;
 </string>
           </argument>
@@ -275,9 +275,57 @@ if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacUp||
             x = 608;
             y = 736;
         }else{
-            room_goto(rmGameOver);
+            game_over = true;
         }
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///End the Game
+if(game_over){
+    room_goto(rmGameOver);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Sprite animation
+if(lol){
+    sprite_direction_change();
 }
 </string>
           </argument>
@@ -304,7 +352,7 @@ if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacUp||
             <string>draw_set_halign(fa_left);             //Der Text wird horizontal in der mitte des Knopfes gemalt
 draw_set_valign(fa_top);
 draw_text(10,10, "Points: " + string(points));
-draw_text(10,94, direcktion_state);
+draw_text(10,94, game_over);
 
 if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacUp||sprite_index == sPacDown){
     switch(hp){

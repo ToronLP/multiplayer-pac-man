@@ -36,7 +36,6 @@ toy = y;
 //Client id zum Sprite Wechseln
 client_id = 0;
 //Richtung des Pacs
-direcktion_state = "left";
 </string>
           </argument>
         </arguments>
@@ -83,18 +82,70 @@ tim++;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Sprite animieren
-if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacDown||sprite_index == sPacUp){
-    if(direcktion_state == "right"){
+            <string>///Pac Animieren Links Rechts
+if(sprite_index == sPacRight or sprite_index == sPacLeft or sprite_index == sPacUp or sprite_index == sPacDown){
+    if(prx &lt;= tox){
         sprite_index = sPacRight;
-    }else if(direcktion_state == "left"){
+    }
+}
+if(sprite_index == sPacLeft or sprite_index == sPacRight or sprite_index == sPacUp or sprite_index == sPacDown){
+    if(prx &gt;= tox){
         sprite_index = sPacLeft;
-    }else if(direcktion_state == "down"){
-        sprite_index = sPacDown;
-    }else if(direcktion_state == "up"){
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Pac Animieren Links Rechts
+if(sprite_index == sPacLeft or sprite_index == sPacRight or sprite_index == sPacDown){
+    if(pry &gt;= toy){
         sprite_index = sPacUp;
     }
-} else {
+}
+if(sprite_index == sPacRight or sprite_index == sPacLeft or sprite_index == sPacUp){
+    if(pry &lt;= toy){
+        sprite_index = sPacDown;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Ghost Animieren
+if(sprite_index = sGhost1||sprite_index = sGhost2||sprite_index = sGhost3||sprite_index = sGhost4){
     if(image_index &gt; 8){
         image_index = 0;
     }
@@ -121,7 +172,9 @@ if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacDown
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(10,104, direcktion_state);
+            <string>//draw_set_halign(fa_left);
+//draw_set_valign(fa_top);
+//draw_text(100,104, "prx: " + string(prx) + "pry: " + string(pry) + "tox: " + string(tox) + "toy: " + string(toy));
 </string>
           </argument>
         </arguments>

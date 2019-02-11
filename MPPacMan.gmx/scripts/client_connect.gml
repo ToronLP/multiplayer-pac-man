@@ -45,6 +45,7 @@ while(true){
             client = buffer_read(buffer, buffer_u16);                   //Den Client aus dem buffer holen
             xx = buffer_read(buffer, buffer_u16);                       //Die x position des Clients holen
             yy = buffer_read(buffer, buffer_u16);                       //Die y position des Clients holen
+            isGameOver = buffer_read(buffer, buffer_string);
             clientObject = client_get_object(client);                   //Script zur bestimmung welcher client gemeint ist
             
             clientObject.tim = 0;                                       //
@@ -52,6 +53,7 @@ while(true){
             clientObject.pry = clientObject.y;                          //
             clientObject.tox = xx;                                      //Setzen der x position des bewegten clients
             clientObject.toy = yy;                                      //Setzen der y position des bewegten clients
+            clientObject.game_over = isGameOver;
             
             with(oServerClient){
                 if(client_id != client_is_current){
