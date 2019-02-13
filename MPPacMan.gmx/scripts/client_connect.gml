@@ -53,7 +53,6 @@ while(true){
             clientObject.pry = clientObject.y;                          //
             clientObject.tox = xx;                                      //Setzen der x position des bewegten clients
             clientObject.toy = yy;                                      //Setzen der y position des bewegten clients
-            clientObject.game_over = isGameOver;
             
             with(oServerClient){
                 if(client_id != client_is_current){

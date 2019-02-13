@@ -30,15 +30,13 @@ client_id = 0;
 direcktion_state = "right";
 grid_size = 64;
 hsp = 0;
-vspe = 0;
+vsp = 0;
 is_moving = false;
 move_timer = grid_size;
 setStats = false;
 hp = 3;
 game_over = false;
 points = 0;
-
-
 </string>
           </argument>
         </arguments>
@@ -106,31 +104,33 @@ if(gamepad_axis_value(0, gp_axislv)&gt;0||keyboard_check(vk_down)||keyboard_chec
 } else if(gamepad_axis_value(0, gp_axislv)&lt;0||keyboard_check(vk_up)||keyboard_check(ord("W"))){
     key_up = true;
 }*/
-if(!is_moving){
-    if(key_left){
-        is_moving = true;
-        move_timer = grid_size;
-        hsp = -move_speed;
-        vsp = 0;
-        direcktion_state = "left";
-    } else if(key_right){
-        is_moving = true;
-        move_timer = grid_size;
-        hsp = move_speed;
-        vsp = 0;
-        direcktion_state = "right";
-    } else if(key_up){
-        is_moving = true;
-        move_timer = grid_size;
-        hsp = 0;
-        vsp = -move_speed;
-        direcktion_state = "up";
-    } else if(key_down){
-        is_moving = true;
-        move_timer = grid_size;
-        hsp = 0;
-        vsp = move_speed;
-        direcktion_state = "down";
+if(!game_over){
+    if(!is_moving){
+        if(key_left){
+            is_moving = true;
+            move_timer = grid_size;
+            hsp = -move_speed;
+            vsp = 0;
+            direcktion_state = "left";
+        } else if(key_right){
+            is_moving = true;
+            move_timer = grid_size;
+            hsp = move_speed;
+            vsp = 0;
+            direcktion_state = "right";
+        } else if(key_up){
+            is_moving = true;
+            move_timer = grid_size;
+            hsp = 0;
+            vsp = -move_speed;
+            direcktion_state = "up";
+        } else if(key_down){
+            is_moving = true;
+            move_timer = grid_size;
+            hsp = 0;
+            vsp = move_speed;
+            direcktion_state = "down";
+        }
     }
 }
 </string>

@@ -63,7 +63,6 @@ socket_id = argument0,                                                          
 buffer = argument1,                                                                     //Der übergebene buffer in dem die zu erledingenden dinge stehen
 clientObject = clientmap[? string(socket_id)],                                          //Holen des Clients anhand der Socket_id
 client_id_current = clientObject.client_id;                                             //Holen der Client_id aus dem Client
-isGameOver = clientObject.game_over; 
 
 while(true){
     var
@@ -84,7 +83,6 @@ while(true){
             buffer_write(send_buffer, buffer_u16, client_id_current);                   //Die Client_id wird in den send_buffer gespeichert, damit der Client der sich bewegt identifiziert werden kann.
             buffer_write(send_buffer, buffer_u16, xx);                                  //Die neue x position des Clients wird in den send_buffer gespeichert, damit der Client sich bewegt.
             buffer_write(send_buffer, buffer_u16, yy);                                  //Die neue y position des Clients wird in den send_buffer gespeichert, damit der Client sich bewegt.
-            buffer_write(send_buffer, buffer_string, isGameOver);
             
             with(oServerClient){
                 //Abfrage, damit nicht an sich selber gesendet wird.
