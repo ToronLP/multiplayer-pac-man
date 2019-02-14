@@ -30,15 +30,13 @@ client_id = 0;
 direcktion_state = "right";
 grid_size = 64;
 hsp = 0;
-vspe = 0;
+vsp = 0;
 is_moving = false;
 move_timer = grid_size;
 setStats = false;
 hp = 3;
 game_over = false;
 points = 0;
-
-
 </string>
           </argument>
         </arguments>
@@ -106,31 +104,35 @@ if(gamepad_axis_value(0, gp_axislv)&gt;0||keyboard_check(vk_down)||keyboard_chec
 } else if(gamepad_axis_value(0, gp_axislv)&lt;0||keyboard_check(vk_up)||keyboard_check(ord("W"))){
     key_up = true;
 }*/
-if(!is_moving){
-    if(key_left){
-        is_moving = true;
-        move_timer = grid_size;
-        hsp = -move_speed;
-        vsp = 0;
-        direcktion_state = "left";
-    } else if(key_right){
-        is_moving = true;
-        move_timer = grid_size;
-        hsp = move_speed;
-        vsp = 0;
-        direcktion_state = "right";
-    } else if(key_up){
-        is_moving = true;
-        move_timer = grid_size;
-        hsp = 0;
-        vsp = -move_speed;
-        direcktion_state = "up";
-    } else if(key_down){
-        is_moving = true;
-        move_timer = grid_size;
-        hsp = 0;
-        vsp = move_speed;
-        direcktion_state = "down";
+if(zuschauer==false){
+    if(!game_over){
+        if(!is_moving){
+            if(key_left){
+                is_moving = true;
+                move_timer = grid_size;
+                hsp = -move_speed;
+                vsp = 0;
+                direcktion_state = "left";
+            } else if(key_right){
+                is_moving = true;
+                move_timer = grid_size;
+                hsp = move_speed;
+                vsp = 0;
+                direcktion_state = "right";
+            } else if(key_up){
+                is_moving = true;
+                move_timer = grid_size;
+                hsp = 0;
+                vsp = -move_speed;
+                direcktion_state = "up";
+            } else if(key_down){
+                is_moving = true;
+                move_timer = grid_size;
+                hsp = 0;
+                vsp = move_speed;
+                direcktion_state = "down";
+            }
+        }
     }
 }
 </string>
@@ -154,7 +156,7 @@ if(!is_moving){
           <argument>
             <kind>1</kind>
             <string>/// Collision Detection and movement
-if(is_moving){
+if(is_moving&amp;&amp;sprite_index == sGhost1||sprite_index == sGhost2||sprite_index == sGhost3||sprite_index == sGhost4){
     if(move_timer &gt; 0) {
         if(place_meeting(x + hsp, y, oWallParrent)){
             hsp = 0;
@@ -162,6 +164,22 @@ if(is_moving){
         }
         x += hsp;
         if(place_meeting(x,y + vsp, oWallParrent)){
+            vsp = 0;
+            move_timer = 0;
+        }
+        y += vsp;
+        move_timer -= move_speed;
+    } else {
+        is_moving = false;
+    }
+} else if(is_moving&amp;&amp;sprite_index == sPacLeft||sprite_index == sPacRight||sprite_index == sPacDown||sprite_index == sPacUp){
+    if(move_timer &gt; 0) {
+        if(place_meeting(x + hsp, y, oWallParrent)||place_meeting(x + hsp, y, oWallGhosts)){
+            hsp = 0;
+            move_timer = 0;
+        }
+        x += hsp;
+        if(place_meeting(x,y + vsp, oWallParrent)||place_meeting(x,y + vsp, oWallGhosts)){
             vsp = 0;
             move_timer = 0;
         }
@@ -409,7 +427,9 @@ if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacUp||
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>if(!instance_exists(oZuschauer)){
+    draw_self();
+}
 switch(client_id){
     case 0:
         sprite_index = sPacRight;

@@ -63,7 +63,6 @@ socket_id = argument0,                                                          
 buffer = argument1,                                                                     //Der übergebene buffer in dem die zu erledingenden dinge stehen
 clientObject = clientmap[? string(socket_id)],                                          //Holen des Clients anhand der Socket_id
 client_id_current = clientObject.client_id;                                             //Holen der Client_id aus dem Client
-isGameOver = clientObject.game_over; 
 
 while(true){
     var
@@ -84,7 +83,6 @@ while(true){
             buffer_write(send_buffer, buffer_u16, client_id_current);                   //Die Client_id wird in den send_buffer gespeichert, damit der Client der sich bewegt identifiziert werden kann.
             buffer_write(send_buffer, buffer_u16, xx);                                  //Die neue x position des Clients wird in den send_buffer gespeichert, damit der Client sich bewegt.
             buffer_write(send_buffer, buffer_u16, yy);                                  //Die neue y position des Clients wird in den send_buffer gespeichert, damit der Client sich bewegt.
-            buffer_write(send_buffer, buffer_string, isGameOver);
             
             with(oServerClient){
                 //Abfrage, damit nicht an sich selber gesendet wird.
@@ -125,6 +123,22 @@ while(true){
                     network_send_raw(socket_id,                                         //Die socket_ids werden vom Server Client genommen da er diese schon hat.
                                      other.send_buffer,                                 //Der send_buffer des aktuellen Clients wird gesendet. 
                                      buffer_tell(other.send_buffer));                   //Die länge des send_buffers.
+                }
+            }
+        break;
+        case MESSAGE_GAME_DONE:
+            if(client_id==0){
+                gameDone = buffer_read(buffer, buffer_bool);
+                clientObject.game_over = gameDone;
+                buffer_seek(send_buffer, buffer_seek_start, 0);
+                buffer_write(send_buffer, buffer_u8, MESSAGE_GAME_DONE);
+                buffer_write(send_buffer, buffer_u16, client_id);
+                buffer_write(send_buffer, buffer_bool, gameDone);
+                
+                with(oServerClient){
+                    if(client_id != client_id_current){
+                        network_send_raw(self.socket_id, other.send_buffer, buffer_tell(other.send_buffer));
+                    }
                 }
             }
         break;

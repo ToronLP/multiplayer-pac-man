@@ -45,7 +45,6 @@ while(true){
             client = buffer_read(buffer, buffer_u16);                   //Den Client aus dem buffer holen
             xx = buffer_read(buffer, buffer_u16);                       //Die x position des Clients holen
             yy = buffer_read(buffer, buffer_u16);                       //Die y position des Clients holen
-            isGameOver = buffer_read(buffer, buffer_string);
             clientObject = client_get_object(client);                   //Script zur bestimmung welcher client gemeint ist
             
             clientObject.tim = 0;                                       //
@@ -53,7 +52,6 @@ while(true){
             clientObject.pry = clientObject.y;                          //
             clientObject.tox = xx;                                      //Setzen der x position des bewegten clients
             clientObject.toy = yy;                                      //Setzen der y position des bewegten clients
-            clientObject.game_over = isGameOver;
             
             with(oServerClient){
                 if(client_id != client_is_current){
@@ -79,6 +77,13 @@ while(true){
             
             with(tempObject){
                 instance_destroy();                                     //Das Object welches Disconnected löschen
+            }
+        break;
+        case MESSAGE_GAME_DONE:
+            client = buffer_read(buffer, buffer_u16);
+            clientObject = client_get_object(client); 
+            if(clientObject.client_id != 0){
+                clientObject.game_over = buffer_read(buffer, buffer_bool);
             }
         break;
     }
@@ -120,7 +125,7 @@ if(client_id == my_client_id){
 if(ds_map_exists(clientmap, string(client_id))){        //Wenn der Client schon ein mal eine message vom anderen Client bekommen hat.
     return clientmap[? string(client_id)];              //Die map des Clients zurück geben
 }else{
-    var l = instance_create(0, 0, oOtherClient);        //Ein neues Object erzäugen für den anderen Client
+    var l = instance_create(608, 672, oOtherClient);        //Ein neues Object erzäugen für den anderen Client
     l.client_id = client_id;
     switch(client_id){
         case 0:

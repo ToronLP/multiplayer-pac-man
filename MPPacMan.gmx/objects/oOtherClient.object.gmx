@@ -83,12 +83,10 @@ tim++;
           <argument>
             <kind>1</kind>
             <string>///Pac Animieren Links Rechts
-if(sprite_index == sPacRight or sprite_index == sPacLeft or sprite_index == sPacUp or sprite_index == sPacDown){
+if(client_id == 0){
     if(prx &lt;= tox){
         sprite_index = sPacRight;
     }
-}
-if(sprite_index == sPacLeft or sprite_index == sPacRight or sprite_index == sPacUp or sprite_index == sPacDown){
     if(prx &gt;= tox){
         sprite_index = sPacLeft;
     }
@@ -114,12 +112,10 @@ if(sprite_index == sPacLeft or sprite_index == sPacRight or sprite_index == sPac
           <argument>
             <kind>1</kind>
             <string>///Pac Animieren Links Rechts
-if(sprite_index == sPacLeft or sprite_index == sPacRight or sprite_index == sPacDown){
+if(client_id == 0){
     if(pry &gt;= toy){
         sprite_index = sPacUp;
     }
-}
-if(sprite_index == sPacRight or sprite_index == sPacLeft or sprite_index == sPacUp){
     if(pry &lt;= toy){
         sprite_index = sPacDown;
     }

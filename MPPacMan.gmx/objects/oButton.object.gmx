@@ -62,6 +62,7 @@
     room_goto(rmLevel);
     //instance_create(0,0, oClient);                  //Ein Client Objekt erzäugen
     instance_create(-100,-100, oZuschauer);         //Einen Zuschauer erzäugen
+    instance_destroy(oPlayer)
 }
 </string>
           </argument>
