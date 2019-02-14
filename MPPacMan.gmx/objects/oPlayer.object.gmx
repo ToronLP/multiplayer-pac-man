@@ -104,7 +104,6 @@ if(gamepad_axis_value(0, gp_axislv)&gt;0||keyboard_check(vk_down)||keyboard_chec
 } else if(gamepad_axis_value(0, gp_axislv)&lt;0||keyboard_check(vk_up)||keyboard_check(ord("W"))){
     key_up = true;
 }*/
-<<<<<<< HEAD
 if(zuschauer==false){
     if(!game_over){
         if(!is_moving){
@@ -133,34 +132,6 @@ if(zuschauer==false){
                 vsp = move_speed;
                 direcktion_state = "down";
             }
-=======
-if(!game_over){
-    if(!is_moving){
-        if(key_left){
-            is_moving = true;
-            move_timer = grid_size;
-            hsp = -move_speed;
-            vsp = 0;
-            direcktion_state = "left";
-        } else if(key_right){
-            is_moving = true;
-            move_timer = grid_size;
-            hsp = move_speed;
-            vsp = 0;
-            direcktion_state = "right";
-        } else if(key_up){
-            is_moving = true;
-            move_timer = grid_size;
-            hsp = 0;
-            vsp = -move_speed;
-            direcktion_state = "up";
-        } else if(key_down){
-            is_moving = true;
-            move_timer = grid_size;
-            hsp = 0;
-            vsp = move_speed;
-            direcktion_state = "down";
->>>>>>> origin/master
         }
     }
 }
@@ -361,8 +332,11 @@ if(sprite_index == sPacRight||sprite_index == sPacLeft||sprite_index == sPacUp||
           <argument>
             <kind>1</kind>
             <string>///End the Game
-if(game_over){
+if(game_over&amp;&amp;client_id == 0){
     room_goto(rmGameOver);
+    if(instance_exists(oGameDone)){
+        oGameDone.text = "Game Over";
+    }
 }
 </string>
           </argument>

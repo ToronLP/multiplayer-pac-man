@@ -105,6 +105,7 @@
       <object>objects\oCoin</object>
       <object>objects\oCherry</object>
     </objects>
+    <object>objects\oGameDone</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmOne</room>
@@ -112,17 +113,14 @@
     <room>rooms\rmServer</room>
     <room>rooms\rmGameOver</room>
   </rooms>
-  <constants number="8">
+  <constants number="9">
     <constant name="SERVER_IP">"127.0.0.1"</constant>
     <constant name="UPDATE_SPEED">3</constant>
     <constant name="MESSAGE_MOVE">1</constant>
     <constant name="MESSAGE_JOIN">2</constant>
     <constant name="MESSAGE_LEAVE">3</constant>
     <constant name="MESSAGE_GETID">4</constant>
-<<<<<<< HEAD
     <constant name="MESSAGE_GAME_DONE">5</constant>
-=======
->>>>>>> origin/master
     <constant name="MAX_ANZ_CLIENTS">6</constant>
     <constant name="ZUSCHAUER_CODE">"21.01.2019"</constant>
   </constants>

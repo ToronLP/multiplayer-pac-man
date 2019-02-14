@@ -48,11 +48,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(txt == "create server"){                         //Wenn der text im Button Create Server ist
+            <string>if(txt == "Server Erstellen"){                         //Wenn der text im Button Create Server ist
     //with(oButton) instance_destroy();               //Alle Knöpfe zerstören
     room_goto(rmServer);
     //instance_create(0,0,oServer);                   //Einen server aufbauen
-} else if(txt == "join server"){                    //Wenn der text im Button Join Server ist
+} else if(txt == "Server Beitreten"){                    //Wenn der text im Button Join Server ist
     //with(oButton) instance_destroy();               //Alle Knöpfe zerstören
     room_goto(rmLevel);
     instance_create(0,0, oClient);                  //Ein Client Objekt erzäugen
@@ -63,6 +63,8 @@
     //instance_create(0,0, oClient);                  //Ein Client Objekt erzäugen
     instance_create(-100,-100, oZuschauer);         //Einen Zuschauer erzäugen
     instance_destroy(oPlayer)
+} else if(txt == "Beenden"){
+    game_end();
 }
 </string>
           </argument>

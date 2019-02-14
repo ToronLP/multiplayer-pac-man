@@ -489,15 +489,7 @@
     <option_use_new_audio>True</option_use_new_audio>
     <option_variableerrors>False</option_variableerrors>
     <option_version>100</option_version>
-<<<<<<< HEAD
-    <option_version_build>38</option_version_build>
-=======
-<<<<<<< HEAD
-    <option_version_build>37</option_version_build>
-=======
-    <option_version_build>23</option_version_build>
->>>>>>> origin/master
->>>>>>> 78d82868238f5edf19721c7e74d516764adef94e
+    <option_version_build>49</option_version_build>
     <option_version_company></option_version_company>
     <option_version_copyright></option_version_copyright>
     <option_version_description></option_version_description>
@@ -577,15 +569,7 @@
     <option_winUAP_wide_logo>Configs\Default\WindowsUAP\logos\WideLogo.scale-100.png</option_winUAP_wide_logo>
     <option_windowcolor>clBlack</option_windowcolor>
     <option_windows_alternate_sync_method>False</option_windows_alternate_sync_method>
-<<<<<<< HEAD
-    <option_windows_build_version>37</option_windows_build_version>
-=======
-<<<<<<< HEAD
-    <option_windows_build_version>23</option_windows_build_version>
-=======
-    <option_windows_build_version>19</option_windows_build_version>
->>>>>>> origin/master
->>>>>>> 78d82868238f5edf19721c7e74d516764adef94e
+    <option_windows_build_version>39</option_windows_build_version>
     <option_windows_company_info></option_windows_company_info>
     <option_windows_copyright_info></option_windows_copyright_info>
     <option_windows_create_textures_on_demand>False</option_windows_create_textures_on_demand>
