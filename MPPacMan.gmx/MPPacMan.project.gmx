@@ -114,7 +114,7 @@
     <room>rooms\rmGameOver</room>
   </rooms>
   <constants number="9">
-    <constant name="SERVER_IP">"127.0.0.1"</constant>
+    <constant name="SERVER_IP">"192.168.2.10"</constant>
     <constant name="UPDATE_SPEED">3</constant>
     <constant name="MESSAGE_MOVE">1</constant>
     <constant name="MESSAGE_JOIN">2</constant>
