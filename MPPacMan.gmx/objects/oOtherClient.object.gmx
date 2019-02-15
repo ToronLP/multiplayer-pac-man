@@ -35,7 +35,8 @@ tox = x;
 toy = y;
 //Client id zum Sprite Wechseln
 client_id = 0;
-//Richtung des Pacs
+//Pac Direction Change
+direction_state = "right";
 </string>
           </argument>
         </arguments>
@@ -82,42 +83,21 @@ tim++;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Pac Animieren Links Rechts
-if(client_id == 0){
-    if(prx &lt;= tox){
-        sprite_index = sPacRight;
-    }
-    if(prx &gt;= tox){
-        sprite_index = sPacLeft;
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Pac Animieren Links Rechts
-if(client_id == 0){
-    if(pry &gt;= toy){
-        sprite_index = sPacUp;
-    }
-    if(pry &lt;= toy){
-        sprite_index = sPacDown;
+            <string>///Pac Animieren
+if(sprite_index = sPacUp|| sprite_index == sPacDown|| sprite_index == sPacLeft|| sprite_index == sPacRight){
+    switch(direction_state){
+        case "right":
+            sprite_index = sPacRight;
+        break;
+        case "left":
+            sprite_index = sPacLeft;
+        break;
+        case "down":
+            sprite_index = sPacDown;
+        break;
+        case "up":
+            sprite_index = sPacUp;
+        break;
     }
 }
 </string>
@@ -181,8 +161,6 @@ if(instance_exists(oOtherClient)){
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -199,9 +177,21 @@ if(instance_exists(oOtherClient)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//draw_set_halign(fa_left);
-//draw_set_valign(fa_top);
-//draw_text(100,104, "prx: " + string(prx) + "pry: " + string(pry) + "tox: " + string(tox) + "toy: " + string(toy));
+            <string>/// Check for direction
+if(client_id == 0){
+    if(x&lt;tox){
+        direction_state = "left";
+    } 
+    if(x&gt;tox) {
+        direction_state = "right";
+    }
+    if(y&lt;toy){
+        direction_state = "up";
+    } 
+    if(y&gt;toy) {
+        direction_state = "down";
+    }
+}
 </string>
           </argument>
         </arguments>

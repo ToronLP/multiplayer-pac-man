@@ -38,7 +38,11 @@ while(true){
     switch(message_id){
         case MESSAGE_GETID:
             my_client_id = buffer_read(buffer, buffer_u16);
-            oPlayer.client_id = my_client_id;
+            if(instance_exists(oPlayer)){
+                oPlayer.client_id = my_client_id;
+            } else if(instance_exists(oZuschauer)){
+                oZuschauer.client_id = my_client_id;
+            }
         break;
         case MESSAGE_MOVE:
             var                                                         //Der Buffer der gesendet wurde muss in der gleichen Reihenfolge ausgelesen werden wie er geschrieben wurde.
@@ -52,6 +56,7 @@ while(true){
             clientObject.pry = clientObject.y;                          //
             clientObject.tox = xx;                                      //Setzen der x position des bewegten clients
             clientObject.toy = yy;                                      //Setzen der y position des bewegten clients
+            
             
             with(oServerClient){
                 if(client_id != client_is_current){
@@ -79,13 +84,6 @@ while(true){
                 instance_destroy();                                     //Das Object welches Disconnected löschen
             }
         break;
-        case MESSAGE_GAME_DONE:
-            client = buffer_read(buffer, buffer_u16);
-            clientObject = client_get_object(client); 
-            if(clientObject.client_id != 0){
-                clientObject.game_over = buffer_read(buffer, buffer_bool);
-            }
-        break;
     }
     
     if(buffer_tell(buffer) == buffer_get_size(buffer)){
@@ -105,9 +103,14 @@ network_destroy(socket);    //Löschen der socket
 buffer_seek(send_buffer, buffer_seek_start, 0);                     //Das Schreiben wird am anfang des buffers geschehen.
 
 buffer_write(send_buffer, buffer_u8, MESSAGE_MOVE);                 //Welche Aktion durchgeführt wird.
-buffer_write(send_buffer, buffer_u16, round(oPlayer.x));            //Die Spieler x position
-buffer_write(send_buffer, buffer_u16, round(oPlayer.y));            //Die Spieler y position
-
+if(instance_exists(oPlayer)){
+    buffer_write(send_buffer, buffer_u16, round(oPlayer.x));            //Die Spieler x position
+    buffer_write(send_buffer, buffer_u16, round(oPlayer.y));            //Die Spieler y position
+} else if(instance_exists(oZuschauer)){
+    buffer_write(send_buffer, buffer_u16, round(oZuschauer.x));            //Die Spieler x position
+    buffer_write(send_buffer, buffer_u16, round(oZuschauer.y));            //Die Spieler y position
+}
+    
 network_send_raw(socket, send_buffer, buffer_tell(send_buffer));    //Das eigene socket wird benutzt zum identifizieren, der send_buffer wird gesendet mit der länge.
 
 #define client_get_object
@@ -117,32 +120,35 @@ var
 client_id = argument0;
 if(client_id == my_client_id){
     if(!instance_exists(oPlayer)){
-        instance_create(0, 0, oPlayer);
+        if(!instance_exists(oZuschauer)){
+            instance_create(0, 0, oPlayer);
+            return oPlayer.id;
+        }
     }
-    //oPlayer.client_id = my_client_id;
-    return oPlayer.id;
 }
 if(ds_map_exists(clientmap, string(client_id))){        //Wenn der Client schon ein mal eine message vom anderen Client bekommen hat.
     return clientmap[? string(client_id)];              //Die map des Clients zurück geben
 }else{
     var l = instance_create(608, 672, oOtherClient);        //Ein neues Object erzäugen für den anderen Client
     l.client_id = client_id;
-    switch(client_id){
-        case 0:
-            l.sprite_index = sPacRight;
-        break;
-        case 1:
-            l.sprite_index = sGhost1;
-        break;
-        case 2:
-            l.sprite_index = sGhost2;
-        break;
-        case 3:
-            l.sprite_index = sGhost3;
-        break;
-        case 4:
-            l.sprite_index = sGhost4;
-        break;
+    if(!instance_exists(oZuschauer)){
+        switch(client_id){
+            case 0:
+                l.sprite_index = sPacRight;
+            break;
+            case 1:
+                l.sprite_index = sGhost1;
+            break;
+            case 2:
+                l.sprite_index = sGhost2;
+            break;
+            case 3:
+                l.sprite_index = sGhost3;
+            break;
+            case 4:
+                l.sprite_index = sGhost4;
+            break;
+        }
     }
     clientmap[? string(client_id)] = l;                 //Dem neuen Client eine map zuweisen
     return l;                                           //Den neuen Client zurückgeben

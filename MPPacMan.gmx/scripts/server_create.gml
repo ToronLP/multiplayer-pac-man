@@ -126,22 +126,6 @@ while(true){
                 }
             }
         break;
-        case MESSAGE_GAME_DONE:
-            if(client_id==0){
-                gameDone = buffer_read(buffer, buffer_bool);
-                clientObject.game_over = gameDone;
-                buffer_seek(send_buffer, buffer_seek_start, 0);
-                buffer_write(send_buffer, buffer_u8, MESSAGE_GAME_DONE);
-                buffer_write(send_buffer, buffer_u16, client_id);
-                buffer_write(send_buffer, buffer_bool, gameDone);
-                
-                with(oServerClient){
-                    if(client_id != client_id_current){
-                        network_send_raw(self.socket_id, other.send_buffer, buffer_tell(other.send_buffer));
-                    }
-                }
-            }
-        break;
     }
     
     //sichert das alles aus dem buffer benutzt wird

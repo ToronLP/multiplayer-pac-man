@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,11 +25,69 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//LUL
-zuschauer = true;
-//oOtherClient.name = "Zuschauer";
-client_id = 0;
-instance_destroy(oPlayer);
+            <string>client_id = 0;
+name = "";
+direction_state = "";
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Change the x and y Position
+x = 0;
+y = 0;
+
+if(instance_exists(oPlayer)){
+    instance_destroy(oPlayer);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///End the Game
+if(instance_exists(oOtherClient)){
+    if(oOtherClient.client_id == 0){
+        if(oOtherClient.x &lt;= 0||oOtherClient.x &gt;= room_width||oOtherClient.y &lt;= 0||oOtherClient.y &gt;= room_height){
+            room_goto(rmGameOver);
+            if(instance_exists(oGameDone)){
+                oGameDone.text = "Du hast Gewonnen";
+            }
+        }
+    }
+}
 </string>
           </argument>
         </arguments>

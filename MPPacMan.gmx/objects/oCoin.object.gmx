@@ -52,7 +52,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>image_speed = .5;
+draw_self();
 </string>
           </argument>
         </arguments>
