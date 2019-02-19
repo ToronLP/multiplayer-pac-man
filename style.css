@@ -3,3 +3,32 @@ body{
   padding: 0;
   font-family: sans-serif;
 }
+.navbar{
+  background: rgba(255,100,100,1);
+  overflow: hidden;
+  height: 4.75em;
+}
+.navbar a{
+  display: block;
+  color: #FFF;
+  text-align: center;
+  padding: 1em 2em;
+  text-decoration: none;
+  font-size: 1.15em;
+}
+.navbar .logo{
+  float: left;
+  display: block;
+  color: #FFF;
+  text-align: center;
+  padding: 0.4em 2em;
+  text-decoration: none;
+  font-size: 2.5em;
+}
+.navbar ul li a{
+  float: right;
+}
+.navbar ul{
+  margin: .5em 0 0 0;
+  list-style: none;
+}
