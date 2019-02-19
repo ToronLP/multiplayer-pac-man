@@ -13,18 +13,6 @@ body{
   height: 4.75em;
   width: 100%;
 }
-.navbar a{
-  display: block;
-  color: #000;
-  font-weight: bold;
-  text-align: center;
-  padding: 1em 1em;
-  margin: 0 1em 0 1em;
-  text-decoration: none;
-  font-size: 1.15em;
-  background: rgba(255,255,0,1);
-  border-radius: .25em;
-}
 .navbar .logo{
   float: left;
   display: block;
@@ -34,15 +22,49 @@ body{
   text-decoration: none;
   font-size: 2.5em;
 }
-.navbar ul li a{
-  float: right;
-}
 .navbar ul{
   margin: .5em 0 0 0;
   list-style: none;
 }
+.navbar ul li a{
+  float: right;
+}
+.navbar a{
+  display: block;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+  padding: 1em 1em;
+  margin: 0 1em 0 1em;
+  text-decoration: none;
+  background: rgba(255,255,0,1);
+  font-size: 1.15em;
+  border-radius: .25em;
+}
+.navbar a#item1:hover{
+  background: rgba(0,255,255,1);
+}
+.navbar a#item2:hover{
+  background: rgba(255,255,150,1);
+}
+.navbar a#item3:hover{
+  background: rgba(255,50,50,1);
+}
+.navbar a#item4:hover{
+  background: rgba(50,255,50,1);
+}
+
+
 .content{
   margin: 2em;
   color: #FFF;
   font-size: 1.5em;
+}
+.content .issues {
+  color: rgb(0,0,255);
+  text-decoration: none;
+}
+.content .issues:hover {
+  color: rgb(255,255,0);
+  text-decoration: none;
 }
