@@ -8,10 +8,14 @@ body{
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0,0,255,.5);
+  background: rgba(0,0,255,0);
   overflow: hidden;
   height: 4.75em;
   width: 100%;
+  transition: .3s;
+}
+.navbar.maxOpacity{
+  background: rgba(0,0,150,1);
 }
 .navbar .logo{
   float: left;
